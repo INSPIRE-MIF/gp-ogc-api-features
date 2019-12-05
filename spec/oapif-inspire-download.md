@@ -30,7 +30,7 @@ While all of these approaches use the Web for providing access to geospatial dat
 
 Therefore, this document describes an additional option for the implementation of INSPIRE download services. 
 
-In order to facilitate the use of off-the-shelf software implementing the OGC API - Features standard to meet the requirements in this document, INSPIRE-specific extensions are limited to the absolute minimum. Where several implementation options exist, this document describes the specific way of application of the OAPIF and associated standards to meet the requirements of the INSPIRE Implementing Rules for download services.
+In order to facilitate the use of off-the-shelf software implementing the OGC API - Features standard (OAPIF) to meet the requirements in this document, INSPIRE-specific extensions are limited to the absolute minimum. Where several implementation options exist, this document describes the specific way of application of the OAPIF and associated standards to meet the requirements of the INSPIRE Implementing Rules for download services.
 
 ### OGC API - Features - a brief overview
 
@@ -40,7 +40,7 @@ OGC API - Features provides API building blocks to create, modify and query feat
 
 By default, every API implementing this standard will provide access to a single dataset. Rather than sharing the data as a complete dataset, the OGC API - Features standards offer direct, fine-grained access to the data at the feature (object) level. Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
 
-For further details about the standard, see the official [OGC API - Features website] (https://www.opengeospatial.org/standards/ogcapi-features). 
+For further details about the standard, see the official [OGC API - Features website](https://www.opengeospatial.org/standards/ogcapi-features). 
 
 For a description of the main differences between WFS 2.0 and OGC API - Features, see [this section in the Guide on OGC API - Features](https://github.com/opengeospatial/ogcapi-features/blob/master/guide/section_8_WFS_2_0_v_3_0.adoc).
 
