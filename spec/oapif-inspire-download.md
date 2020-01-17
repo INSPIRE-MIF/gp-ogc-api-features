@@ -12,7 +12,7 @@
 * [6. Symbols and abbreviated terms](#symbols-and-abbreviated-terms)
 * [7. INSPIRE Download Services based on OAPIF](#inspire-oapif)
     * [7.1. Main principles](#main-principles)
-    * [7.2. Requirements class “INSPIRE-pre-defined-dataset-download-OAPIF”](#req-pre-defined)
+    * [7.2. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”](#req-pre-defined)
     * [7.3. Requirements class “INSPIRE-multilinguality”](#req-multilinguality)
     * [7.4. Requirements class “INSPIRE-OAPIF-GeoJSON”](#req-oapif-json)
 * [8. Bibliography](#bibliography)
@@ -38,7 +38,7 @@ OGC API standards define modular API parts that spatially enable Web APIs in a c
 
 OGC API - Features provides API building blocks to create, modify and query features on the Web. OGC API - Features is comprised of multiple parts, each of them is a separate standard. The ["Core"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) part specifies the core capabilities and is restricted to retrieving features where geometries are represented in the WGS 84 coordinate reference system with axis order longitude/latitude. Additional capabilities that address more advanced needs will be specified in additional parts. 
 
-By default, every API implementing this standard will provide access to a single dataset. Rather than sharing the data as a complete dataset, the OGC API - Features standards offer direct, fine-grained access to the data at the feature (object) level. Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
+By default, every API implementing this standard will provide access to a single data set. Rather than sharing the data as a complete data set, the OGC API - Features standards offer direct, fine-grained access to the data at the feature (object) level. Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
 
 For further details about the standard, see the official [OGC API - Features website](https://www.opengeospatial.org/standards/ogcapi-features). 
 
@@ -49,7 +49,7 @@ This document proposes a technical approach for implementing the requirements se
 ## 3. Conformance <a name="conformance"></a>
 This specification defines the following requirements classes:
 
-- [INSPIRE-pre-defined-dataset-download-OAPIF (mandatory)](#req-pre-defined)
+- [INSPIRE-pre-defined-data-set-download-OAPIF (mandatory)](#req-pre-defined)
 - [INSPIRE-multilinguality (conditional)<sup> 1</sup>](#req-multilinguality)
 - [INSPIRE-OAPIF-GeoJSON (optional)](#req-oapif-json)
 
@@ -80,12 +80,12 @@ For the purposes of this document, the following terms and definitions apply:
 | --- | --- | ---|
 | content negotiation | HTTP/1.1 allows web site authors to put multiple versions of the same information under a single resource URI.  Each of these versions is called a `variant'. Content negotiation is the process by which the best variant is selected if the resource is accessed. | [RFC 2295](https://tools.ietf.org/html/rfc2295)
 | data set | Identifiable collection of data. | [ISO 19115]()
-| distribution (of a data set) | A specific representation of a dataset. A dataset might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above). | [DCAT](https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution)
+| distribution (of a data set) | A specific representation of a data set. A data set might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above). | [DCAT](https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution)
 | direct access download service | Service that enables copies of spatial data sets, or parts of such sets, to be downloaded. | [INSPIRE](http://inspire.ec.europa.eu/glossary/DownloadService) |
 | encoding | Conversion of data into a series of codes. | [ISO 19118](https://www.iso.org/standard/44212.html) |
 | encoding rule | Identifiable collection of conversion rules that define the encoding for a particular data structure. | [ISO 19118](https://www.iso.org/standard/44212.html) |
 | feature | Abstraction of real world phenomena. **NOTE** The concept of a `feature` is synonymous to a `spatial object` in INSPIRE | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature) |
-| feature collection | A set of features from a dataset. | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection)
+| feature collection | A set of features from a data set. | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection)
 | feature type | **NOTE** The concept of a `feature type` is synonymous to a `spatial object type` in INSPIRE | [INSPIRE](https://inspire.ec.europa.eu/glossary/SpatialObject) |
 | pre-defined data set download service | Service that enables copies of spatial data sets, or parts of such sets, to be downloaded and, where practicable, accessed directly. | [INSPIRE](http://inspire.ec.europa.eu/glossary/DownloadService) |
 | Web API | API using an architectural style that is founded on the technologies of the Web. | [DWBP](https://www.w3.org/TR/dwbp) |
@@ -125,7 +125,7 @@ This section describes the requirements a Web API shall fulfill in order to be c
 | Spatial objects | Features | http://my-org.eu/addresses/collections/address/items | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
 | Spatial object | Feature | http://my-org.eu/addresses/collections/address/items/{featureId} | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
  
-### 7.2. Requirements class “INSPIRE-pre-defined-dataset-download-OAPIF”  <a name="req-pre-defined"></a>
+### 7.2. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”  <a name="req-pre-defined"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/pre-defined |
 | --- | --- |
@@ -192,11 +192,11 @@ This section describes the requirements a Web API shall fulfill in order to be c
 
 **EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
-- This feature collections example response in JSON is for a dataset with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
+- This feature collections example response in JSON is for a data set with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
 
 - Representations of the resource in other formats are referenced using link relation type `alternate`.
 
-- An additional link is to a GML application schema for the dataset - using link relation type `describedBy`.
+- An additional link is to a GML application schema for the data set - using link relation type `describedBy`.
 
 - There are also links to the license information for the building data (using link relation type `license`).
 
@@ -242,7 +242,7 @@ This section describes the requirements a Web API shall fulfill in order to be c
   ]
 }
 ```
-##### Organisation of a dataset in feature collections
+##### Organisation of a data set in feature collections
 
 | **Requirement** | **/req/pre-defined/spatial-object-type** |
 | --- | --- |
@@ -273,7 +273,7 @@ This section describes the requirements a Web API shall fulfill in order to be c
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/multilinguality |
 | --- | --- |
 | Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-dataset-download-OAPIF](#req-pre-defined)  |
+| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
 
 This requirements class is mandatory for all data sets that contain information in more than one natural language.
 
@@ -373,7 +373,7 @@ This workaround presumes that the following requirements and recommendations are
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/geojson |
 | --- | --- |
 | Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-dataset-download-OAPIF](#req-pre-defined)  |
+| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
 | Dependency | [OAPIF requirements class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)  |
 
 #### 7.4.1. INSPIRE-specific requirements
