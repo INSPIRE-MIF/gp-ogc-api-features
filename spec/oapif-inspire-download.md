@@ -136,7 +136,7 @@ This section describes the requirements a Web API shall fulfill in order to be c
 
 | **Requirement** | **/req/pre-defined/oapif-core** |
 | --- | --- |
-| A | The Web API SHALL comply with the [OAPIF-core](http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core) requirements class.|
+| A | The Web API SHALL comply with the [OAPIF-core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core) requirements class.|
 
 **TEST** 
 1. Tests defined by for [OAPIF CC Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_conformance_class_core) shall be satisfied.
