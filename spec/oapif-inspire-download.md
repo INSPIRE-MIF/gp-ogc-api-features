@@ -56,8 +56,9 @@ This specification defines the following requirements classes:
 <sup>1 </sup>The INSPIRE-multilinguality RC is mandatory for all data sets that contain information in more than one natural language.
 
 Future versions of this specification may include further conformance classes, in particular for 
-- direct access download, and
-- quality of service.
+- direct access download,
+- quality of service, and
+- support for additional CRS.
 
 The target of all requirements classes are “Web APIs”. Conformance with this specification shall be assessed using all the relevant conformance test cases specified in [Annex A (normative)](#ats) of this specification.
 
@@ -99,6 +100,7 @@ For the purposes of this document, the following terms and definitions apply:
 | Abbreviation | Term |
 | --- | --- |
 | API |	Application Programming Interface |
+| CRS | Coordinate Reference System |
 | DCAT | Data Catalog Vocabulary |
 | GML | Geography Markup Language |
 | JSON | JavaScript Object Notation |
