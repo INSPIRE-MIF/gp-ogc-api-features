@@ -377,12 +377,8 @@ This workaround presumes that the following requirements and recommendations are
 | Dependency | [OAPIF requirements class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)  |
 
 #### 7.4.1. INSPIRE-specific requirements
-This requirements class is relevant when providing access to INSPIRE data encoded as (Geo-)JSON. (e.g. those developed in 2017.2 for Addresses and Environmental Monitoring Features).
+This requirements class is relevant when providing access to INSPIRE data encoded as (Geo-)JSON (e.g. by following the approach defined in [INSPIRE action 2017.2](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?pageId=277742184) for 'Addresses' and 'Environmental Monitoring Facilities').
 
-
-| **Requirement** | **/req/geojson/oapif-geojson** |
-| --- | --- |
-| A | The Web API SHALL comply with [OAPIF requirements class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson). |
 
 | **Recommendation** | **/rec/geojson/geojson-inspire** |
 | --- | --- |
