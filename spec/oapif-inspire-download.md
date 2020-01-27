@@ -136,12 +136,7 @@ This section describes the requirements a Web API shall fulfill in order to be c
 
 #### 7.2.1. OAPIF requirements
 
-| **Requirement** | **/req/pre-defined/oapif-core** |
-| --- | --- |
-| A | The Web API SHALL comply with the [OAPIF-core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core) requirements class.|
-
-**TEST** 
-1. Tests defined by for [OAPIF CC Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_conformance_class_core) shall be satisfied.
+The Web API depends on the  [OAPIF Requirements class "Core"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core) for providing access to INSPIRE data.
 
 **NOTE** The Web API shall return collections and features in the default OAPIF coordinate reference system (WGS 84 longitude and latitude). However, the `enclosure` link for bulk download could still provide access to a data set in a different CRS.
 
@@ -149,11 +144,12 @@ This section describes the requirements a Web API shall fulfill in order to be c
 | --- | --- |
 | A | The Web API SHALL comply with OAPIF requirements class OpenAPI 3.0. |
 
-**NOTE 1** In the OAPIF standard, the [OpenAPI 3.0 Requirements class](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0) is optional. This specification proposes to make it a mandatory requirement for INSPIRE in order to facilitate the development of client applications, and in particular adding support in the [European INSPIRE geoportal](https://inspire-geoportal.ec.europa.eu).
+In the OAPIF standard, the [OpenAPI 3.0 Requirements class](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0) is optional. This specification proposes to make it a mandatory requirement for INSPIRE in order to facilitate the development of client applications, and in particular adding support in the [European INSPIRE geoportal](https://inspire-geoportal.ec.europa.eu).
 
-**NOTE 2** In accordance with the security requirements of the [OpenAPI 3.0 Requirements class](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#security), for cases where the operations of the server are access-controlled, the security scheme(s) SHALL be documented in the OpenAPI definition.
 
-**NOTE 3** There are plans to add additional requirements classes for other API description standards (or standard versions) in the future (e.g. for OpenAPI v3.1). When additional requirements classes become available, this specification will be reviewed and possibly revised to include these as additional options.
+**NOTE 1** In accordance with the security requirements of the [OpenAPI 3.0 Requirements class](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#security), for cases where the operations of the server are access-controlled, the security scheme(s) SHALL be documented in the OpenAPI definition.
+
+**NOTE 2** There are plans to add additional requirements classes for other API description standards (or standard versions) in the future (e.g. for OpenAPI v3.1). When additional requirements classes become available, this specification will be reviewed and possibly revised to include these as additional options.
 
 #### 7.2.2. INSPIRE-specific requirements
 ##### Download of the whole data set
