@@ -70,7 +70,6 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 - **[IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089)** - European Commission Regulation 1089/2010 implementing Directive 2007/2/EC as regards interoperability of spatial data sets and services
 - **[RFC 7231](https://tools.ietf.org/html/rfc7231)** - Hypertext Transfer Protocol (HTTP/1.1)
 - **[RFC 4647](https://tools.ietf.org/html/rfc4647)** - Phillips, A. and David, M. (eds.). Matching of Language Tags [online]. Internet Engineering Task Force, September 2006
-- **[RFC 6838](https://tools.ietf.org/html/rfc6838)** - Media Type Specifications and Registration Procedures
 - **[RSS 2.0](http://www.rssboard.org/rss-draft-1)** - Really Simple Syndication Specification (RSS 2.0) Specification 
 
 <sup>2 </sup> The standard is in the process of being released as [ISO 19168-1](https://www.iso.org/standard/32586.html).
@@ -168,11 +167,11 @@ The Web API depends on the  [OAPIF Requirements class "Core"](http://docs.openge
 
 | **Requirement** | **/req/pre-defined/enclosure-type** |
 | --- | --- |
-| A | A link with the relation type `enclosure` SHALL include the `type` link parameter containing a media type valid that is valid according to [RFC 6838](https://tools.ietf.org/html/rfc6838). |
+| A | A link with the relation type `enclosure` SHALL include the `type` link parameter containing a type which is included in the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types). |
 
 **TEST**
 1. Issue an HTTP GET request to `{root}/collections`.
-2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`,validate that the `type` parameter is present and the media type is valid according to [RFC 6838](https://tools.ietf.org/html/rfc6838).
+2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`,validate that the `type` parameter is present and the media type is valid according the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types).
 
 
 **NOTE** Requirements for downloads of a whole data set available in more than one natural language are included in the requirements class INSPIRE-multilinguality.
