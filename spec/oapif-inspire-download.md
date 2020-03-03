@@ -64,6 +64,8 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 
 ## 4. Normative references <a name="normative-references"></a>
 
+- **[ISO 19115-2:2019](https://schemas.isotc211.org/schemas/19115/-2/gmi/1.0/gmi.xsd)** - ISO 19115-2:2019, *Geographic information — Metadata — Part 2: Extensions for acquisition and processing*
+- **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)** - OGC API - Features - Part 1: Core<sup> 2</sup>
 - **[OpenAPI 3.0](https://swagger.io/docs/specification/about)** - OpenAPI specification v3.0 
 - **[IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1088)** - European Commission Regulation 1088/2010 of 23 November 2010 amending Regulation (EC) No 976/2009 as regards download services and transformation services
@@ -148,6 +150,24 @@ The Web API depends on the  [OAPIF Requirements class "Core"](http://docs.openge
 **NOTE 4** There are plans to add additional requirements classes for other API description standards (or standard versions) in the future (e.g. for OpenAPI v3.1). When additional requirements classes become available, this specification will be reviewed and possibly revised to include these as additional options.
 
 #### 7.2.2. INSPIRE-specific requirements
+
+##### Metadata elements of the data set
+
+| **Requirement** | **/req/pre-defined/spatial-data-set-metadata** |
+| --- | --- |
+| A | The response of the `/collections` operation SHALL include a link to the metadata record for the data set. This link SHALL have `rel` link parameter `describedby` and `type` link parameter `application/xml`. |
+
+**TEST**
+1. Issue an HTTP GET request to {root}/collections.
+2. Validate that at least one of the links returned in the response has `rel` link parameter `describedby` and `type` link parameter `application/xml`.
+3. For each of the links returned in the response having a `rel` link parameter `describedby` and `type` link parameter `application/xml`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
+4. Validate that for one of the responses the returned XML document satisfies one of the following:
+    - The document has root element `{http://www.opengis.net/cat/csw/2.0.2}GetRecordByIdResponse` followed by element `{http://www.isotc211.org/2005/gmd}MD_Metadata`.
+    - The document has root element `{http://www.isotc211.org/2005/gmd}MD_Metadata`.
+    - The document has root element `{http://standards.iso.org/iso/19115/-2/gmi/1.0}MI_Metadata`.
+
+**NOTE** If the data set is available in GML, the link to the GML application schema of the data set will also have `rel` link parameter `describedby` and `type` link parameter `application/xml`.
+
 ##### Download of the whole data set
 
 | **Requirement** | **/req/pre-defined/enclosure** |
