@@ -15,6 +15,7 @@
     * [7.2. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”](#req-pre-defined)
     * [7.3. Requirements class “INSPIRE-multilinguality”](#req-multilinguality)
     * [7.4. Requirements class “INSPIRE-OAPIF-GeoJSON”](#req-oapif-json)
+    * [7.5. Requirements class "INSPIRE-bulk-download"](#req-bulk-download)
 * [8. Bibliography](#bibliography)
 * [Annex A: Abstract Test Suite](#ats)
 * [Annex B: Mapping the requirements from the IRs to the OGC  API - Features standard (and extensions)](#ir2oapif)
@@ -52,6 +53,7 @@ This specification defines the following requirements classes:
 - [INSPIRE-pre-defined-data-set-download-OAPIF (mandatory)](#req-pre-defined)
 - [INSPIRE-multilinguality (conditional)<sup> 1</sup>](#req-multilinguality)
 - [INSPIRE-OAPIF-GeoJSON (optional)](#req-oapif-json)
+- [INSPIRE-bulk-download] (optional)(#req-bulk-download)
 
 <sup>1 </sup>The INSPIRE-multilinguality RC is mandatory for all data sets that contain information in more than one natural language.
 
@@ -310,14 +312,14 @@ This requirements class is relevant when providing access to INSPIRE data encode
 | --- | --- |
 | A | For each `collection` which is encoded as GeoJSON and provides harmonised data according to the [[IRs for ISDSS]](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), the Web API SHOULD follow the [INSPIRE UML-to-GeoJSON encoding rule.](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md) |
 
-### 7.5. Requirements class “INSPIRE-bulk-download”
+### 7.5. Requirements class “INSPIRE-bulk-download” <a name="req-bulk-download"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/bulk-download |
 | --- | --- |
 | Target type | Web API |
 | Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
 
-This requirements class implements the recommendation from \[DWBP\] to provide a [bulk download](https://www.w3.org/TR/dwbp/#BulkAccess) of a dataset, to enable consumers to retrieve the full dataset with a single request. It therefore allows for providing datasets that meet the Open Definition \[OD\] \[Dodd16\].
+This requirements class implements the recommendation from \[DWBP\] to provide a [bulk download](https://www.w3.org/TR/dwbp/#BulkAccess) of a dataset, to enable consumers to retrieve the full dataset through a single request. It therefore allows for providing datasets that meet the Open Definition \[OD\] \[Dodd16\].
 
 | **Requirement** | **/req/pre-defined/enclosure** |
 | --- | --- |
