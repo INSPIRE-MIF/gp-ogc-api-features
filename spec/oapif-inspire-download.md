@@ -168,96 +168,6 @@ The Web API depends on the  [OAPIF Requirements class "Core"](http://docs.openge
 
 **NOTE** If the data set is available in GML, the link to the GML application schema of the data set will also have `rel` link parameter `describedby` and `type` link parameter `application/xml`.
 
-##### Download of the whole data set
-
-| **Requirement** | **/req/pre-defined/enclosure** |
-| --- | --- |
-| A | The response of the `/collections` operation SHALL include at least one `enclosure` link that allows requesting a representation of the whole data set. |
-
-**TEST**
-
-1. Issue an HTTP GET request to {root}/collections.
-2. Validate that at least one of the links returned in the response has `rel` link parameter `enclosure`.
-3. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
-4. For each of the responses:
-    - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inclusive.
-    - If HTTP status code 200 is returned and HTTP header Content-Length > 0, the test verdict is “pass”.
-    - Otherwise, the test verdict is “fail”.
-
-
-| **Requirement** | **/req/pre-defined/enclosure-type** |
-| --- | --- |
-| A | A link with the relation type `enclosure` SHALL include the `type` link parameter containing a type which is included in the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types). |
-
-**TEST**
-1. Issue an HTTP GET request to `{root}/collections`.
-2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`,validate that the `type` parameter is present and the media type is valid according the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types).
-
-
-**NOTE** Requirements for downloads of a whole data set available in more than one natural language are included in the requirements class INSPIRE-multilinguality.
-
-
-| **Recommendation** | **/rec/pre-defined/enclosure-length** |
-| --- | --- |
-| A | A link with the link relation type `enclosure` SHOULD include the `length` link parameter containing the length in bytes. |
-
-| **Recommendation** | **/rec/pre-defined/enclosure-title** |
-| --- | --- |
-| A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter containing a human-friendly name. |
-
-
-**EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
-
-- This feature collections example response in JSON is for a data set with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
-
-- Representations of the resource in other formats are referenced using link relation type `alternate`.
-
-- An additional link is to a GML application schema for the data set - using link relation type `describedBy`.
-
-- There are also links to the license information for the building data (using link relation type `license`).
-
-- Finally, the link with the link relation type `enclosure` provides a reference to another distribution of the data set as a GeoPackage download of the complete data set (pre-defined download). The `length` property includes the size in bytes of the data set.
-
-```json
-{
-  "links": [
-	{ "href": "http://my-org.eu/collections.json",
-  	"rel": "self", "type": "application/json", "title": "this document" },
-	{ "href": "http://my-org.eu/collections.html",
-  	"rel": "alternate", "type": "text/html", "title": "this document as HTML" },
-	{ "href": "http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
-  	"rel": "describedBy", "type": "application/xml", "title": "The 2D application schema for INSPIRE theme buildings." },
-	{ "href": "http://my-org.eu/buildings.gpkg",
-  	"rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Pre-defined data set download (GeoPackage)", "length": 472546 }
-  ],
-  "collections": [
-	{
-  	"id": "buildings",
-  	"title": "Buildings",
-  	"description": "Buildings in the city of Bonn.",
-  	"extent": {
-    	"spatial": {
-      	"bbox": [ [ 7.01, 50.63, 7.22, 50.78 ] ]
-    	},
-    	"temporal": {
-      	"interval": [ [ "2010-02-15T12:34:56Z", null ] ]
-    	}
-  	},
-  	"links": [
-    	{ "href": "http://my-org.eu/collections/buildings/items",
-      	"rel": "items", "type": "application/geo+json",
-      	"title": "Buildings" },
-    	{ "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-      	"rel": "license", "type": "text/html",
-      	"title": "CC0-1.0" },
-    	{ "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
-      	"rel": "license", "type": "application/rdf+xml",
-      	"title": "CC0-1.0" }
-  	]
-	}
-  ]
-}
-```
 ##### Organisation of a data set in feature collections
 
 | **Requirement** | **/req/pre-defined/spatial-object-type** |
@@ -400,13 +310,131 @@ This requirements class is relevant when providing access to INSPIRE data encode
 | --- | --- |
 | A | For each `collection` which is encoded as GeoJSON and provides harmonised data according to the [[IRs for ISDSS]](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), the Web API SHOULD follow the [INSPIRE UML-to-GeoJSON encoding rule.](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md) |
 
+### 7.5. Requirements class “INSPIRE-bulk-download”
+
+| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/bulk-download |
+| --- | --- |
+| Target type | Web API |
+| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
+
+This requirements class implements the recommendation from \[DWBP\] to provide a [bulk download](https://www.w3.org/TR/dwbp/#BulkAccess) of a dataset, to enable consumers to retrieve the full dataset with a single request. It therefore allows for providing datasets that meet the Open Definition \[OD\] \[Dodd16\].
+
+| **Requirement** | **/req/pre-defined/enclosure** |
+| --- | --- |
+| A | The response of the `/collections` operation SHALL include at least one `enclosure` link that allows requesting a representation of the whole data set. |
+
+ :exclamation: There is an outstanding issue on whether to use `enclosure` or something else, see https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/22
+
+**TEST**
+
+1. Issue an HTTP GET request to {root}/collections.
+2. Validate that at least one of the links returned in the response has `rel` link parameter `enclosure`.
+3. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
+4. For each of the responses:
+    - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inclusive.
+    - If HTTP status code 200 is returned and HTTP header Content-Length > 0, the test verdict is “pass”.
+    - Otherwise, the test verdict is “fail”.
+
+
+| **Requirement** | **/req/pre-defined/enclosure-type** |
+| --- | --- |
+| A | A link with the relation type `enclosure` SHALL include the `type` link parameter containing a type which is included in the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types). |
+
+**TEST**
+1. Issue an HTTP GET request to `{root}/collections`.
+2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`,validate that the `type` parameter is present and the media type is valid according the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types).
+
+
+**NOTE** Requirements for downloads of a whole data set available in more than one natural language are included in the requirements class INSPIRE-multilinguality.
+
+
+| **Recommendation** | **/rec/pre-defined/enclosure-length** |
+| --- | --- |
+| A | A link with the link relation type `enclosure` SHOULD include the `length` link parameter containing the length in bytes. |
+
+| **Recommendation** | **/rec/pre-defined/enclosure-title** |
+| --- | --- |
+| A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter containing a human-friendly name. |
+
+
+**EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
+
+- This feature collections example response in JSON is for a data set with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
+
+- Representations of the resource in other formats are referenced using link relation type `alternate`.
+
+- An additional link is to a GML application schema for the data set - using link relation type `describedBy`.
+
+- There are also links to the license information for the building data (using link relation type `license`).
+
+- Finally, the link with the link relation type `enclosure` provides a reference to another distribution of the data set as a GeoPackage download of the complete data set (pre-defined download). The `length` property includes the size in bytes of the data set.
+
+```json
+{
+  "links": [
+	{ "href": "http://my-org.eu/collections.json",
+  	"rel": "self", "type": "application/json", "title": "this document" },
+	{ "href": "http://my-org.eu/collections.html",
+  	"rel": "alternate", "type": "text/html", "title": "this document as HTML" },
+	{ "href": "http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
+  	"rel": "describedBy", "type": "application/xml", "title": "The 2D application schema for INSPIRE theme buildings." },
+	{ "href": "http://my-org.eu/buildings.gpkg",
+  	"rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Pre-defined data set download (GeoPackage)", "length": 472546 }
+  ],
+  "collections": [
+	{
+  	"id": "buildings",
+  	"title": "Buildings",
+  	"description": "Buildings in the city of Bonn.",
+  	"extent": {
+    	"spatial": {
+      	"bbox": [ [ 7.01, 50.63, 7.22, 50.78 ] ]
+    	},
+    	"temporal": {
+      	"interval": [ [ "2010-02-15T12:34:56Z", null ] ]
+    	}
+  	},
+  	"links": [
+    	{ "href": "http://my-org.eu/collections/buildings/items",
+      	"rel": "items", "type": "application/geo+json",
+      	"title": "Buildings" },
+    	{ "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+      	"rel": "license", "type": "text/html",
+      	"title": "CC0-1.0" },
+    	{ "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+      	"rel": "license", "type": "application/rdf+xml",
+      	"title": "CC0-1.0" }
+  	]
+	}
+  ]
+}
+```
+
 ## 8. Bibliography <a name="bibliography"></a>
-- [W3C Data on the Web Best Practices](https://www.w3.org/TR/dwbp/)
-- [W3C Spatial Data on the Web Best Practices](https://www.w3.org/TR/sdw-bp/)
+- \[Alla10\] ALLAMARAJU, Subbu. *RESTful Web services cookbook*. O’Reilly
+Media, 2010. ISBN 978-0-596-80168-7.
+- \[Dodd16\] DODDS, Leigh. Why are bulk downloads of open data important?
+*Lost Boy* \[online\]. 19 September 2016. \[Viewed 4 March 2020\].
+Available from:
+<https://blog.ldodds.com/2016/09/19/why-are-bulk-downloads-of-open-data-important/>
+- \[DWBP\] LÓSCIO, Bernadette Farias, BURLE, Caroline and CALEGARI,
+Newton, eds. *Data on the Web Best Practices* \[online\]. W3C
+Recommendation. World Wide Web Consortium, 31 January 2017. Available
+from: <https://www.w3.org/TR/dwbp/>
 - [INSPIRE UML-to-GeoJSON encoding rule](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md)
-- [Alla] Allamaraju, S. RESTful Web services cookbook. O’Reilly Media, 2010. ISBN 978-0-596-80168-7.
-- [SO1] [How to properly send 406 status code?](https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code)
-- [SO2] [Format for 406 Not Acceptable payload?](https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload)
+- \[OD\] *Open Definition* \[online\]. Version 2.1. Open Knowledge
+Foundation, November 2015. Available from:
+<https://opendefinition.org/od/2.1>
+- \[SDWBP\] TANDY, Jeremy, VAN DEN BRINK, Linda and BARNAGHI, Payam, eds.
+*Spatial Data on the Web Best Practices* \[online\]. W3C Working Group
+Note & OGC Best Practice. World Wide Web Consortium, 28 September 2017.
+Available from: <https://www.w3.org/TR/sdw-bp/>
+- \[SO1\] How to properly send 406 status code? *Stack Overflow*
+\[online\]. \[Viewed 4 March 2020\]. Available from:
+<https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
+- \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*
+\[online\]. \[Viewed 4 March 2020\]. Available from:
+<https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
 
 # Annex A: Abstract Test Suite <a name="ats"></a>
 **NOTE** Detailed ATS will be developed in the next version of the document, based on the descriptions of tests included in the main body of the specification for each requirement.
