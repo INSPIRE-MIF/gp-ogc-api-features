@@ -53,7 +53,7 @@ This specification defines the following requirements classes:
 - [INSPIRE-pre-defined-data-set-download-OAPIF (mandatory)](#req-pre-defined)
 - [INSPIRE-multilinguality (conditional)<sup> 1</sup>](#req-multilinguality)
 - [INSPIRE-OAPIF-GeoJSON (optional)](#req-oapif-json)
-- [INSPIRE-bulk-download] (optional)(#req-bulk-download)
+- [INSPIRE-bulk-download (optional)](#req-bulk-download)
 
 <sup>1 </sup>The INSPIRE-multilinguality RC is mandatory for all data sets that contain information in more than one natural language.
 
@@ -115,8 +115,6 @@ This section describes the requirements a Web API shall fulfill in order to be c
 ### 7.1. Main principles <a name="main-principles"></a>
 
 - The Web API provides download access to one INSPIRE data set. For example, two data sets (with their own metadata records), one on buildings and one on addresses will have two landing pages (http://my-org.eu/addresses/ and http://my-org.eu/buildings/) rather than one landing page for the Web API (http://my-org.eu/oapif/) and two feature collections, one for each data set (http://my-org.eu/oapif/collections/addresses and http://my-org.eu/oapif/collections/buildings).
-
-&#x1F538; OPEN QUESTION: Would such an approach be feasible from an implementation point of view?
 
 - The data set is structured into one or several feature collections. Аll feature collections available in one API (under the `/collections` path) are considered to be part of the data set provided by the Web API.
 
@@ -221,7 +219,6 @@ The requirements from the [IRs for NS] to support requests in different natural 
 3. Issue an HTTP GET request with the Accept-Language HTTP header set to `*;q=0.0` to the following URLs: {root}/ and {root}/collections. For every feature collection identified in step 1, issue an HTTP GET request with the Accept-Language header set to `*;q=0.0` to {root}/collections/{collectionId} and {root}/collections/{collectionId}/items?limit=5.
 4. For every response, validate that the HTTP status code is 406.
 
-&#x1F538; OPEN QUESTION: How to test for /collections/{collectionId}/items/{featureId}? It would give way too much overhead to test every single feature. One feature? One feature in every collection?
 
 | **Requirement** | **/req/multilinguality/content-language-root** |
 | --- | --- |
@@ -238,8 +235,6 @@ The requirements from the [IRs for NS] to support requests in different natural 
 | A | The Web API SHOULD take the language specified in the `Accept-Language` HTTP header of a request to all paths into account. The Web API SHOULD include the `Content-Language` HTTP header in the response for a request to all paths. |
 
 ##### Internationalization: supported languages
-
-&#x1F538; OPEN QUESTION: Would the proposed approach based on HTTP standards be easily implementable by existing solutions. 
 
 [RFC 7231](https://tools.ietf.org/html/rfc7231) does not define what such a response body exactly should look like, see also Annex B, and no other existing specifications have been identified that define this. As one of the principles in this specification is not to have any INSPIRE-specific extensions or requirements, this specification therefore does not give a stronger recommendation. This specification may be updated when the response body returned with HTTP status code 406 is standardised.
 
@@ -283,8 +278,6 @@ This workaround presumes that the following requirements and recommendations are
 - [Recommendation 2 of OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_http_1_1), regarding the support of HTTP method HEAD
 - **/req/multilinguality/accept-language-header**, and **/rec/multilinguality/content-language-paths** regarding support for Accept-Language and Content-Languages
 
-
-&#x1F538; OPEN QUESTION: Do you have any other proposals for how to implement the requirement for the download service to advertise the natural languages it supports?
 
 | **Requirement** | **/req/multilinguality/hreflang** |
 | --- | --- |
@@ -468,8 +461,6 @@ Metadata Date (M)
 Metadata Language (M) 
 Unique Resource Identifier (M)
 
-&#x1F538; OPEN QUESTION: Would the proposed lightweight mapping to OpenAPI i.e. without extensions of OpenAPI terms (terms beginning with ‘x-’ in accordance with the [OpenAPI specs](https://swagger.io/docs/specification/openapi-extensions)) be sufficient?
-
 --- 
 **NOTE** Additional metadata elements can be added to an OpenAPI definition through [extensions](https://swagger.io/docs/specification/openapi-extensions/), implemented through the introduction of fields beginning with `x-`. However, in order to streamline the implementation of metadata, this document does not propose any INSPIRE-specific extensions. 
 # Annex D. Supported languages  <a name="supported-lang"></a>
@@ -507,7 +498,6 @@ Content-Type: application/json
 
 If [RFC 7808] is to be used, the problem details object would have to be extended with additional members.
 
-&#x1F538; OPEN QUESTION: Would the approach discussed in  https://github.com/opengeospatial/oapi_common/issues/75 be a good way of dealing with errors (incl. INSPIRE-specific ones).
 
 ```
 # Request
