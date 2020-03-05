@@ -1,7 +1,7 @@
 # Setting up an INSPIRE Download service based on the OGC API-Features standard
 
-`Version: 0.1`
-`Date: 2019-12-04`
+`Version: 0.2`
+`Date: 2020-05-03`
 
 ## Table of Contents
 * [1. Introduction](#introduction)
@@ -434,7 +434,7 @@ Available from: <https://www.w3.org/TR/sdw-bp/>
 # Annex A: Abstract Test Suite <a name="ats"></a>
 **NOTE** Detailed ATS will be developed in the next version of the document, based on the descriptions of tests included in the main body of the specification for each requirement.
 # Annex B: Mapping the requirements from the IRs to the OGC-API Features standard (and extensions) <a name="ir2oapif"></a>
-**NOTE** A [draft mapping]() between the requirements from the IRs to the OGC-API Features standard has been proposed and discussed in the INSPIRE MIG-T. This section will be completed based on this discussion paper once this specification is stable. 
+**NOTE** A [draft mapping](https://webgate.ec.europa.eu/fpfis/wikis/download/attachments/332217789/%5BDOC-6%5D%20IRs-WFS3.0%20mapping%20discussion%20paper%20v1.2.pdf?api=v2) between the requirements from the IRs to the OGC-API Features standard has been proposed and discussed in the INSPIRE MIG-T. This section will be completed based on this discussion paper once this specification is stable. 
 
 # Annex C: Mapping between INSPIRE NS Metadata elements and OpenAPI definition fields  <a name="inspire-ns-openapi"></a>
 
