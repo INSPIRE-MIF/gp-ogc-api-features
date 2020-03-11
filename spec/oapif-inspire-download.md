@@ -59,7 +59,7 @@ This specification defines the following requirements classes:
 
 The requirements classes and their dependencies are illustrated in the figure below.
 
-![Dependencies](/figures/dependencies.png)
+![Overview of dependencies](figures/dependencies.png)
 
 Future versions of this specification may include further conformance classes, in particular for 
 - direct access download,
