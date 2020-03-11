@@ -55,7 +55,11 @@ This specification defines the following requirements classes:
 - [INSPIRE-OAPIF-GeoJSON (optional)](#req-oapif-json)
 - [INSPIRE-bulk-download (optional)](#req-bulk-download)
 
-<sup>1 </sup>The INSPIRE-multilinguality RC is mandatory for all data sets that contain information in more than one natural language.
+<sup>1 </sup>The INSPIRE-multilinguality requirements class is mandatory for all data sets that contain information in more than one natural language.
+
+The requirements classes and their dependencies are illustrated in the figure below.
+
+![Dependencies](/figures/dependencies.png)
 
 Future versions of this specification may include further conformance classes, in particular for 
 - direct access download,
@@ -133,12 +137,11 @@ This section describes the requirements a Web API shall fulfill in order to be c
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/pre-defined |
 | --- | --- |
 | Target type | Web API |
-| Dependency | [OAPIF Requirements class "Core"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core) |
-| Dependency | [OAPIF Requirements class "Open API 3.0"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0)
+| Dependency | [OAPIF Requirements class "OpenAPI 3.0"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0)
 
 #### 7.2.1. OAPIF requirements
 
-The Web API depends on the  [OAPIF Requirements class "Core"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core) for providing access to INSPIRE data.
+The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0), and therefore also on the [OAPIF Requirements class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core), for providing access to INSPIRE data.
 
 **NOTE 1** The Web API shall return collections and features in the default OAPIF coordinate reference system (WGS 84 longitude and latitude). However, the `enclosure` link for bulk download could still provide access to a data set in a different CRS.
 
