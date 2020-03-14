@@ -125,11 +125,13 @@ This section describes the requirements a Web API shall fulfill in order to be c
 
 For example, two data sets (with their own metadata records), one on buildings and one on addresses will have two landing pages (https://developer.my-org.eu/apis/addresses/ and https://developer.my-org.eu/apis/buildings/) rather than one landing page for the Web API (https://developer.my-org.eu/apis/oapif/) and two feature collections, one for each data set (https://developer.my-org.eu/apis/oapif/collections/addresses and https://developer.my-org.eu/apis/oapif/collections/buildings).
 
-| INSPIRE resources | OAPIF resource | Sample path | Document reference |
+The mapping between INSPIRE resources and OAPIF resources is given below, for an example data set containing addresses.
+
+| INSPIRE resource | OAPIF resource | Sample path | Document reference |
 | ------------- | ------------- | ------------- |-------------: |
-| (Distribution<sup> 3</sup> of a) data set | Landing page | https://developer.my-org.eu/apis/addresses/ <br> https://developer.my-org.eu/apis/buildings/ | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
-| Data set description | Feature collections | https://developer.my-org.eu/apis/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)
-| Spatial object type | Feature collection | https://developer.my-org.eu/apis/addresses/collections/address | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
+| (Distribution<sup> 3</sup> of a) data set | Landing page | https://developer.my-org.eu/apis/addresses/ | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
+| Data set metadata | Feature collections | https://developer.my-org.eu/apis/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)
+| -- | Feature collection | https://developer.my-org.eu/apis/addresses/collections/address | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
 | Spatial objects | Features | https://developer.my-org.eu/apis/addresses/collections/address/items | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
 | Spatial object | Feature | https://developer.my-org.eu/apis/addresses/collections/address/items/{featureId} | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
 
