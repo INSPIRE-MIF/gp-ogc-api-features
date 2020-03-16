@@ -123,15 +123,19 @@ This section describes the requirements a Web API shall fulfill in order to be c
 - A data set is structured into one or several feature collections. Аll feature collections available in one API (under the `/collections` path) are considered to be part of the data set provided by that Web API.
 - A feature collection contains features of only one feature type.
 
-For example, two data sets (with their own metadata records), one on buildings and one on addresses will have two landing pages (http://my-org.eu/addresses/ and http://my-org.eu/buildings/) rather than one landing page for the Web API (http://my-org.eu/oapif/) and two feature collections, one for each data set (http://my-org.eu/oapif/collections/addresses and http://my-org.eu/oapif/collections/buildings).
+For example, two data sets (with their own metadata records), one on buildings and one on addresses will have two landing pages (https://developer.my-org.eu/apis/addresses/ and https://developer.my-org.eu/apis/buildings/) rather than one landing page for the Web API (https://developer.my-org.eu/apis/oapif/) and two feature collections, one for each data set (https://developer.my-org.eu/apis/oapif/collections/addresses and https://developer.my-org.eu/apis/oapif/collections/buildings).
 
-| INSPIRE resources | OAPIF resource | Sample path | Document reference |
+The mapping between INSPIRE resources and OAPIF resources is given below, for an example data set containing addresses.
+
+| INSPIRE resource | OAPIF resource | Sample path | Document reference |
 | ------------- | ------------- | ------------- |-------------: |
-| Data set (all distributions) | Landing page | http://my-org.eu/addresses/ <br> http://my-org.eu/buildings/ | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
-| Data set description | Feature collections | http://my-org.eu/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)
-| Spatial object type | Feature collection | http://my-org.eu/addresses/collections/address | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
-| Spatial objects | Features | http://my-org.eu/addresses/collections/address/items | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
-| Spatial object | Feature | http://my-org.eu/addresses/collections/address/items/{featureId} | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
+| (Distribution<sup> 3</sup> of a) data set | Landing page | https://developer.my-org.eu/apis/addresses/ | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
+| Data set metadata | Feature collections | https://developer.my-org.eu/apis/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)
+| -- | Feature collection | https://developer.my-org.eu/apis/addresses/collections/address | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
+| Spatial objects | Features | https://developer.my-org.eu/apis/addresses/collections/address/items | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
+| Spatial object | Feature | https://developer.my-org.eu/apis/addresses/collections/address/items/{featureId} | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
+
+<sup>3 </sup>The notion of a distribution is not present in the INSPIRE legislation, the legislation does not make the distinction between a data set and its distribution(s). However, this distinction is relevant, see also section 4 in \[DWBP\].
 
 The principle that a Web API provides data from one data set is in line with OGC API - Features - Part 1: Core, as illustrated by the quotes below. As long as no other parts for OGC API - Features are defined that support multiple datasets, INSPIRE adheres to this principle.
 
@@ -377,13 +381,13 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 ```json
 {
   "links": [
-	{ "href": "http://my-org.eu/collections.json",
+	{ "href": "https://developer.my-org.eu/apis/buildings/collections.json",
   	"rel": "self", "type": "application/json", "title": "this document" },
-	{ "href": "http://my-org.eu/collections.html",
+	{ "href": "https://developer.my-org.eu/apis/buildings/collections.html",
   	"rel": "alternate", "type": "text/html", "title": "this document as HTML" },
 	{ "href": "http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
   	"rel": "describedBy", "type": "application/xml", "title": "The 2D application schema for INSPIRE theme buildings." },
-	{ "href": "http://my-org.eu/buildings.gpkg",
+	{ "href": "https://download.my-org.eu/buildings.gpkg",
   	"rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Pre-defined data set download (GeoPackage)", "length": 472546 }
   ],
   "collections": [
