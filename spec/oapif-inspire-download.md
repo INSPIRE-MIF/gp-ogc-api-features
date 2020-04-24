@@ -402,10 +402,12 @@ Available from:
 Newton, eds. *Data on the Web Best Practices* \[online\]. W3C
 Recommendation. World Wide Web Consortium, 31 January 2017. Available
 from: <https://www.w3.org/TR/dwbp/>
+- \[GCloud-REST\] *REST Guidelines of Belgian government institutions*. Available from: <https://www.gcloud.belgium.be/rest/>
 - [INSPIRE UML-to-GeoJSON encoding rule](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md)
 - \[OD\] *Open Definition* \[online\]. Version 2.1. Open Knowledge
 Foundation, November 2015. Available from:
 <https://opendefinition.org/od/2.1>
+- \[MDN\] MDN. *406 Not Acceptable - HTTP | MDN*.  Available from: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406>
 - \[SDWBP\] TANDY, Jeremy, VAN DEN BRINK, Linda and BARNAGHI, Payam, eds.
 *Spatial Data on the Web Best Practices* \[online\]. W3C Working Group
 Note & OGC Best Practice. World Wide Web Consortium, 28 September 2017.
@@ -419,6 +421,8 @@ Available from: <https://www.w3.org/TR/sdw-bp/>
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [Alla10]: https://www.oreilly.com/library/view/restful-web-services/9780596809140/ "RESTful Web services cookbook"
+[GCloud-REST]: https://www.gcloud.belgium.be/rest/ "REST Guidelines of Belgian government institutions"
+[MDN]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406 "406 Not Acceptable - HTTP | MDN"
 [SO1]: https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code "How to properly send 406 status code? (Stack Overflow)"
 [SO2]: https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload "Format for 406 Not Acceptable payload? (Stack Overflow)"
 [RFC 7807]: https://www.rfc-editor.org/info/rfc7807 "Problem Details for HTTP APIs"
@@ -492,8 +496,9 @@ According to [RFC 7231]:
 > the user agent, as determined by shared design or content
 > negotiation, or in some commonly accepted hypertext format.
 
+Depending on the context, different guidelines are given on what HTTP status code to return when language negotiation fails. E.g., according to the [MDN web docs][MDN], 406 is very rarely used, servers ignore the header and serve an actual page to the user. Certain API guidelines, such as the [REST Guidelines of Belgian government institutions][GCloud-REST], prescribe that a server should return a 406 Not Acceptable error if it could not honor any of the requested languages.
 
-[RFC 7231] does not define what a response body returned with HTTP status code, as mentioned in recommendation **/rec/multilinguality/accept-language-header-no-matching-language-tag** exactly should look like, and no other existing specifications have been identified that define this. As one of the principles in this specification is not to have any INSPIRE-specific extensions or requirements, this specification therefore does not give a stronger recommendation. This specification may be updated if/when the response body returned with HTTP status code 406 is standardised.
+[RFC 7231] does not define what a response body returned with HTTP status code 406, as mentioned in recommendation **/rec/multilinguality/accept-language-header-no-matching-language-tag** exactly should look like, and no other existing specifications have been identified that define this. As one of the principles in this specification is not to have any INSPIRE-specific extensions or requirements, this specification therefore does not give a stronger recommendation. This specification may be updated if/when the response body returned with HTTP status code 406 is standardised.
 
 When HTML is acceptable for the client, a response body could look as follows:
 
