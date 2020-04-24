@@ -74,13 +74,21 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)** - OGC API - Features - Part 1: Core<sup> 2</sup>
 - **[OpenAPI 3.0](https://swagger.io/docs/specification/about)** - OpenAPI specification v3.0 
-- **[IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1088)** - European Commission Regulation 1088/2010 of 23 November 2010 amending Regulation (EC) No 976/2009 as regards download services and transformation services
+- **[IRs for NS]** - European Commission Regulation 1088/2010 of 23 November 2010 amending Regulation (EC) No 976/2009 as regards download services and transformation services
 - **[IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089)** - European Commission Regulation 1089/2010 implementing Directive 2007/2/EC as regards interoperability of spatial data sets and services
-- **[RFC 7231](https://tools.ietf.org/html/rfc7231)** - Hypertext Transfer Protocol (HTTP/1.1)
-- **[RFC 4647](https://tools.ietf.org/html/rfc4647)** - Phillips, A. and David, M. (eds.). Matching of Language Tags [online]. Internet Engineering Task Force, September 2006
+- **[RFC 4647]** - Internet Engineering Task Force (IETF). RFC 4647, *Matching of Language Tags*. September 2006
+- **[RFC 5646]** - Internet Engineering Task Force (IETF). RFC 5646, *Tags for Identifying Languages*. September 2009
+- **[RFC 7231]** - Internet Engineering Task Force (IETF). RFC 7231, *Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content*. June 2014
 - **[RSS 2.0](http://www.rssboard.org/rss-draft-1)** - Really Simple Syndication Specification (RSS 2.0) Specification 
 
 <sup>2 </sup> The standard is in the process of being released as [ISO 19168-1](https://www.iso.org/standard/32586.html).
+
+<!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
+[IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1088 "Implementing Rules for Network Services"
+[RFC 4647]: https://www.rfc-editor.org/rfc/rfc4647 "Matching of Language Tags"
+[RFC 5646]: https://www.rfc-editor.org/rfc/rfc5646 "Tags for Identifying Languages"
+[RFC 7231]: https://www.rfc-editor.org/rfc/rfc7231 "HTTP/1.1: Semantics and Content"
+
 ## 5. Terms and definitions <a name="terms-and-definitions"></a>
 For the purposes of this document, the following terms and definitions apply:
 
@@ -150,8 +158,6 @@ The principle that a Web API provides data from one data set is in line with OGC
 | Target type | Web API |
 | Dependency | [OAPIF Requirements class "OpenAPI 3.0"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0)
 
-#### 7.2.1. OAPIF requirements
-
 The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0), and therefore also on the [OAPIF Requirements class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core), for providing access to INSPIRE data.
 
 **NOTE 1** The Web API shall return collections and features in the default OAPIF coordinate reference system (WGS 84 longitude and latitude). However, the `enclosure` link for bulk download could still provide access to a data set in a different CRS.
@@ -163,9 +169,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 **NOTE 4** There are plans to add additional requirements classes for other API description standards (or standard versions) in the future (e.g. for OpenAPI v3.1). When additional requirements classes become available, this specification will be reviewed and possibly revised to include these as additional options.
 
-#### 7.2.2. INSPIRE-specific requirements
-
-##### Metadata elements of the data set
+#### Metadata elements of the data set
 
 | **Requirement** | **/req/pre-defined/spatial-data-set-metadata** |
 | --- | --- |
@@ -182,7 +186,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 **NOTE** If the data set is available in GML, the link to the GML application schema of the data set will also have `rel` link parameter `describedby` and `type` link parameter `application/xml`.
 
-##### Organisation of a data set in feature collections
+#### Organisation of a data set in feature collections
 
 | **Requirement** | **/req/pre-defined/spatial-object-type** |
 | --- | --- |
@@ -210,98 +214,57 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 | A | The license information for the exposed data set SHOULD be provided in accordance with OpenAPI 3.0. A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi) |
 
 ### 7.3. Requirements class INSPIRE-multilinguality <a name="req-multilinguality"></a>
+
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/multilinguality |
 | --- | --- |
 | Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
+| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined) |
 
 This requirements class is mandatory for all data sets that contain information in more than one natural language.
 
-#### 7.3.1. INSPIRE-specific requirements
-##### Internationalisation: request and response language
-
-The requirements from the [IRs for NS] to support requests in different natural languages are met in the Web API through HTTP language negotiation, using HTTP headers as specified in [RFC 7231](https://tools.ietf.org/html/rfc7231), and language tags as specified in [RFC 4647](https://tools.ietf.org/html/rfc4647).
-
+The requirements from the [IRs for NS] to support requests in different natural languages are met in the Web API through HTTP language negotiation, using HTTP headers as specified in [RFC 7231], language tags as specified in [RFC 5646] and matching of language tags as specified in [RFC 4647].
 
 | **Requirement** | **/req/multilinguality/accept-language-header** |
 | --- | --- |
-| A | The Web API SHALL support the `Accept-Language` header in requests to the landing page (/), /collections, /collections/{collectionId}, /collections/{collectionId}/items and /collections/{collectionId}/items/{featureId} in accordance with [RFC 7231](https://tools.ietf.org/html/rfc7231) and [RFC 4647](https://tools.ietf.org/html/rfc4647). The Web API SHALL return HTTP status code 406 when an Accept-Language HTTP header set to `*;q=0.0` is sent. |
+| A | The Web API SHALL support the `Accept-Language` HTTP header in requests to the landing page (`/`), `/collections`, `/collections/{collectionId}`, `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` in accordance with [RFC 7231], [RFC 5646] and [RFC 4647].|
 
 **TEST**
-1. Issue an HTTP GET request with an Accept-Language HTTP header containing a valid language tag to the following URLs: {root}/ and {root}/collections. For every feature collection identified in the response of {root}/collections, issue an HTTP request with an Accept-Language HTTP header containing a valid language tag to {root}/collections/{collectionId}, {root}/collections/{collectionId}/items?limit=5.
+1. Issue an HTTP GET request with an `Accept-Language` HTTP header that contains a valid language priority list (prioritized or weighted list of language ranges, see [RFC 4647]) that does not contain `*;q=0.0` to the following URLs: `{root}/` and `{root}/collections`. For every feature collection identified in the response of `{root}/collections`, issue an HTTP request with an `Accept-Language` HTTP header containing a valid language priority list that does not contain `*;q=0.0` to the following URLs: `{root}/collections/{collectionId}`, `{root}/collections/{collectionId}/items?limit=5`.
 2. For every response, validate that the HTTP status code is 200.
-3. Issue an HTTP GET request with the Accept-Language HTTP header set to `*;q=0.0` to the following URLs: {root}/ and {root}/collections. For every feature collection identified in step 1, issue an HTTP GET request with the Accept-Language header set to `*;q=0.0` to {root}/collections/{collectionId} and {root}/collections/{collectionId}/items?limit=5.
-4. For every response, validate that the HTTP status code is 406.
+
+| **Recommendation** | **/rec/multilinguality/accept-language-header-no-matching-language-tag** |
+| --- | --- |
+| A | The Web API SHOULD return either HTTP status code 200 or HTTP status code 406 (Not Acceptable) when none of the available representations for the response have a language tag that matches the `Accept-Language` HTTP header given by the client. |
+| B | The Web API SHOULD return a representation in the default language when the returned HTTP status code is 200. |
+| C | The Web API SHOULD return a response with a response body containing a list of all supported languages when the returned HTTP status code is 406. |
+
+An `Accept-Language` HTTP header that contains `*;q=0.0`, e.g. `en;q=1.0,*;q=0.0`, tells the server that the client is only willing to accept certain languages, e.g. only English in the given example. According to [RFC 7231], in the case that the server cannot honour the clients request, the server "can either disregard the header field by treating the response as if it is not subject to content negotiation or honor the header field by sending a 406 (Not Acceptable) response". Guidelines on what option to choose depend on the context, see also [Annex D: Supported languages](#supported-lang).
+
 
 
 | **Requirement** | **/req/multilinguality/content-language-root** |
 | --- | --- |
-| A | The Web API SHALL include the `Content-Language` HTTP header in the response for a request to its landing page (/). |
+| A | The Web API SHALL include the `Content-Language` HTTP header in the response for a request to its landing page `(/)` in accordance with [RFC 7231] and [RFC 5646]. |
 
 **TEST**
-1. Issue an HTTP GET request with an Accept-Language HTTP header containing a valid language tag to URL {root}/.
+1. Issue an HTTP GET request with an `Accept-Language` HTTP header containing a valid language priority list to URL `{root}/`.
 2. Validate that a response is returned with a `Content-Language` HTTP header.
-3. Issue an HTTP GET request without a Accept-Language HTTP header to URL {root}/.
+3. Issue an HTTP GET request without a `Accept-Language` HTTP header to URL `{root}/`.
 4. Validate that a response is returned with a `Content-Language` HTTP header.
 
-| **Recommendation** | **/rec/multilinguality/content-language-paths** |
+| **Recommendation** | **/rec/multilinguality/content-negotiation** |
 | --- | --- |
-| A | The Web API SHOULD take the language specified in the `Accept-Language` HTTP header of a request to all paths into account. The Web API SHOULD include the `Content-Language` HTTP header in the response for a request to all paths. |
-
-##### Internationalization: supported languages
-
-[RFC 7231](https://tools.ietf.org/html/rfc7231) does not define what such a response body exactly should look like, see also Annex B, and no other existing specifications have been identified that define this. As one of the principles in this specification is not to have any INSPIRE-specific extensions or requirements, this specification therefore does not give a stronger recommendation. This specification may be updated when the response body returned with HTTP status code 406 is standardised.
-
-| **Recommendation** | **/rec/pre-defined/accept-language-header** |
-| --- | --- |
-| A | The Web API SHOULD return a response with a response body containing a list of all supported languages for requests with the Accept-Language HTTP header set to `*;q=0.0` to the landing page (/), /collections, /collections/{collectionId}, /collections/{collectionId}/items and /collections/{collectionId}/items/{featureId}. |
-
-When HTML is acceptable for the client and the Web API conforms to OAPIF Conformance Class HTML, this could look as follows:
-
-```
-# Request
-GET {root}/ HTTP/1.1
-Accept: text/html
-Accept-Language: *;q=0.0
-```
-
-```
-# Response
-406 Not Acceptable
-Content-Type: application/html
-Content-Language: en
-
-<html>
-  <head>
-    <title>Supported languages</title>
-  </head>
-  <body>
-     <p>This server supports the following languages: English, Danish.</p>
-  </body>
-</html>
-```
-
-As long as the response body supplied in a machine-readable format, such as JSON, sent with HTTP status code 406, is not standardised, it is not possible to build applications, such as the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu/), that can programmatically access a list of supported languages and display that information to an end user. A workaround for this is the following procedure:
-1. Retrieve a list of languages of interest
-    - For a EU-wide application, this could be a list of all EU official languages.
-    - For another application, this could be a list of languages chosen by an end user.
-2. For every all language of interest, issue an HTTP HEAD request to the landing page (/) having HTTP header Accept-Language set to `language_of_interest_tag,*;q=0.0` (e.g. `en,*;q=0.0`).
-3. For every response: if the HTTP status code of the response is 200, add the language specified in Content-Language to the list of supported languages.
-
-This workaround presumes that the following requirements and recommendations are followed:
-- [Recommendation 2 of OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_http_1_1), regarding the support of HTTP method HEAD
-- **/req/multilinguality/accept-language-header**, and **/rec/multilinguality/content-language-paths** regarding support for Accept-Language and Content-Languages
-
+| A | The Web API SHOULD take the language specified in the `Accept-Language` HTTP header of a request to all paths into account. The Web API SHOULD include the `Content-Language` HTTP header in the response for a request to all paths in accordance with [RFC 7231] and [RFC 5646]. |
 
 | **Requirement** | **/req/multilinguality/hreflang** |
 | --- | --- |
-| A | A link with the link relation type “enclosure” SHALL include the `hreflang` link parameter containing the language of that distribution. The value of `hreflang` SHALL follow [RFC 4647]. |
+| A | A link with the link relation type `enclosure` SHALL include the `hreflang` link parameter containing the language of that distribution. The value of `hreflang` SHALL be in accordance with [RFC 4647]. |
 
 **TEST**
 
 1. Issue an HTTP GET request to `{root}/collections`.
 2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, validate that the `hreflang` parameter is present.
-3. Check that the `hreflang` parameter  contains a language encoded in accordance with [RFC 4647]
+3. Check that the `hreflang` parameter contains a language encoded in accordance with [RFC 4647].
 
 ### 7.4. Requirements class “INSPIRE-OAPIF-GeoJSON” <a name="req-oapif-json"></a>
 
@@ -311,7 +274,6 @@ This workaround presumes that the following requirements and recommendations are
 | Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
 | Dependency | [OAPIF requirements class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)  |
 
-#### 7.4.1. INSPIRE-specific requirements
 This requirements class is relevant when providing access to INSPIRE data encoded as (Geo-)JSON (e.g. by following the approach defined in [INSPIRE action 2017.2](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?pageId=277742184) for 'Addresses' and 'Environmental Monitoring Facilities').
 
 
@@ -341,7 +303,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 3. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
 4. For each of the responses:
     - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inclusive.
-    - If HTTP status code 200 is returned and HTTP header Content-Length > 0, the test verdict is “pass”.
+    - If HTTP status code 200 is returned and HTTP header` Content-Length` > 0, the test verdict is “pass”.
     - Otherwise, the test verdict is “fail”.
 
 
@@ -351,7 +313,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 **TEST**
 1. Issue an HTTP GET request to `{root}/collections`.
-2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`,validate that the `type` parameter is present and the media type is valid according the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types).
+2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, validate that the `type` parameter is present and the media type is valid according the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types).
 
 
 **NOTE** Requirements for downloads of a whole data set available in more than one natural language are included in the requirements class INSPIRE-multilinguality.
@@ -365,6 +327,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | --- | --- |
 | A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter containing a human-friendly name. |
 
+### 7.6. Example
 
 **EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
@@ -372,7 +335,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 - Representations of the resource in other formats are referenced using link relation type `alternate`.
 
-- An additional link is to a GML application schema for the data set - using link relation type `describedBy`.
+- An additional link is to a GML application schema for the data set - using link relation type `describedby`.
 
 - There are also links to the license information for the building data (using link relation type `license`).
 
@@ -381,40 +344,49 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 ```json
 {
   "links": [
-	{ "href": "https://developer.my-org.eu/apis/buildings/collections.json",
-  	"rel": "self", "type": "application/json", "title": "this document" },
-	{ "href": "https://developer.my-org.eu/apis/buildings/collections.html",
-  	"rel": "alternate", "type": "text/html", "title": "this document as HTML" },
-	{ "href": "http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
-  	"rel": "describedBy", "type": "application/xml", "title": "The 2D application schema for INSPIRE theme buildings." },
-	{ "href": "https://download.my-org.eu/buildings.gpkg",
-  	"rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Pre-defined data set download (GeoPackage)", "length": 472546 }
+  { "href": "https://developer.my-org.eu/apis/buildings/collections.json",
+    "rel": "self",
+    "type": "application/json",
+    "title": "this document" },
+  { "href": "https://developer.my-org.eu/apis/buildings/collections.html",
+    "rel": "alternate",
+    "type": "text/html",
+    "title": "this document as HTML" },
+  { "href": "http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
+    "rel": "describedby",
+    "type": "application/xml",
+    "title": "The 2D application schema for INSPIRE theme buildings." },
+  { "href": "https://download.my-org.eu/buildings.gpkg",
+    "rel": "enclosure",
+    "type": "application/geopackage+sqlite3",
+    "title": "Pre-defined data set download (GeoPackage)",
+    "length": 472546 }
   ],
   "collections": [
-	{
-  	"id": "buildings",
-  	"title": "Buildings",
-  	"description": "Buildings in the city of Bonn.",
-  	"extent": {
-    	"spatial": {
-      	"bbox": [ [ 7.01, 50.63, 7.22, 50.78 ] ]
-    	},
-    	"temporal": {
-      	"interval": [ [ "2010-02-15T12:34:56Z", null ] ]
-    	}
-  	},
-  	"links": [
-    	{ "href": "http://my-org.eu/collections/buildings/items",
-      	"rel": "items", "type": "application/geo+json",
-      	"title": "Buildings" },
-    	{ "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-      	"rel": "license", "type": "text/html",
-      	"title": "CC0-1.0" },
-    	{ "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
-      	"rel": "license", "type": "application/rdf+xml",
-      	"title": "CC0-1.0" }
-  	]
-	}
+  {
+    "id": "buildings",
+    "title": "Buildings",
+    "description": "Buildings in the city of Bonn.",
+    "extent": {
+      "spatial": {
+        "bbox": [ [ 7.01, 50.63, 7.22, 50.78 ] ]
+      },
+      "temporal": {
+        "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
+      }
+    },
+    "links": [
+      { "href": "http://my-org.eu/collections/buildings/items",
+        "rel": "items", "type": "application/geo+json",
+        "title": "Buildings" },
+      { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "rel": "license", "type": "text/html",
+        "title": "CC0-1.0" },
+      { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+        "rel": "license", "type": "application/rdf+xml",
+        "title": "CC0-1.0" }
+    ]
+  }
   ]
 }
 ```
@@ -444,6 +416,12 @@ Available from: <https://www.w3.org/TR/sdw-bp/>
 - \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*
 \[online\]. \[Viewed 4 March 2020\]. Available from:
 <https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
+
+<!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
+[Alla10]: https://www.oreilly.com/library/view/restful-web-services/9780596809140/ "RESTful Web services cookbook"
+[SO1]: https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code "How to properly send 406 status code? (Stack Overflow)"
+[SO2]: https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload "Format for 406 Not Acceptable payload? (Stack Overflow)"
+[RFC 7807]: https://www.rfc-editor.org/info/rfc7807 "Problem Details for HTTP APIs"
 
 # Annex A: Abstract Test Suite <a name="ats"></a>
 **NOTE** Detailed ATS will be developed in the next version of the document, based on the descriptions of tests included in the main body of the specification for each requirement.
@@ -477,19 +455,72 @@ Unique Resource Identifier (M)
 
 --- 
 **NOTE** Additional metadata elements can be added to an OpenAPI definition through [extensions](https://swagger.io/docs/specification/openapi-extensions/), implemented through the introduction of fields beginning with `x-`. However, in order to streamline the implementation of metadata, this document does not propose any INSPIRE-specific extensions. 
+
 # Annex D. Supported languages  <a name="supported-lang"></a>
-According to [RFC 7231](https://tools.ietf.org/html/rfc7231):
 
->   The 406 (Not Acceptable) status code indicates that the target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request (Section 5.3), and the server is unwilling to supply a default representation.
+According to [RFC 7231]:
 
->  The server SHOULD generate a payload containing a list of available representation characteristics and corresponding resource identifiers from which the user or user agent can choose the one most appropriate.  A user agent MAY automatically select the most appropriate choice from that list.  However, this specification does not define any standard for such automatic selection, as described in Section 6.4.1.
-
+> A request without any Accept-Language header field implies that the
+> user agent will accept any language in response.  If the header field
+> is present in a request and none of the available representations for
+> the response have a matching language tag, the origin server can
+> either disregard the header field by treating the response as if it
+> is not subject to content negotiation or honor the header field by
+> sending a 406 (Not Acceptable) response.
+> 
 > [...]
+>
+> The 406 (Not Acceptable) status code indicates that the target
+> resource does not have a current representation that would be
+> acceptable to the user agent, according to the proactive negotiation
+> header fields received in the request (Section 5.3), and the server
+> is unwilling to supply a default representation.
+>
+> The server SHOULD generate a payload containing a list of available
+> representation characteristics and corresponding resource identifiers
+> from which the user or user agent can choose the one most
+> appropriate.  A user agent MAY automatically select the most
+> appropriate choice from that list.  However, this specification does
+> not define any standard for such automatic selection>
+> 
+> [...]
+>
+> A specific format for automatic selection is not defined by
+> this specification because HTTP tries to remain orthogonal to the
+> definition of its payloads.  In practice, the representation is
+> provided in some easily parsed format believed to be acceptable to
+> the user agent, as determined by shared design or content
+> negotiation, or in some commonly accepted hypertext format.
 
-> A specific format for automatic selection is not defined by this specification because HTTP tries to remain orthogonal to the definition of its payloads.  In practice, the representation is provided in some easily parsed format believed to be acceptable to the user agent, as determined by shared design or content negotiation, or in some commonly accepted hypertext format.
 
+[RFC 7231] does not define what a response body returned with HTTP status code, as mentioned in recommendation **/rec/multilinguality/accept-language-header-no-matching-language-tag** exactly should look like, and no other existing specifications have been identified that define this. As one of the principles in this specification is not to have any INSPIRE-specific extensions or requirements, this specification therefore does not give a stronger recommendation. This specification may be updated if/when the response body returned with HTTP status code 406 is standardised.
 
-Similar to the example on to [SO2], this could look as follows when JSON is acceptable for the client:
+When HTML is acceptable for the client, a response body could look as follows:
+
+```
+# Request
+GET {root}/ HTTP/1.1
+Accept: text/html
+Accept-Language: *;q=0.0
+```
+
+```
+# Response
+406 Not Acceptable
+Content-Type: application/html
+Content-Language: en
+
+<html>
+  <head>
+    <title>Supported languages</title>
+  </head>
+  <body>
+     <p>This server supports the following languages: English, Danish.</p>
+  </body>
+</html>
+```
+
+Similar to the example described on [Stack Overflow][SO2], this could look as follows when JSON is acceptable for the client:
 
 ```
 # Request
@@ -508,9 +539,7 @@ Content-Type: application/json
 }
 ```
 
-[RFC 7807] defines a "problem detail" as a way to carry machine-readable details of errors in an HTTP response to avoid the need to define new error response formats for HTTP APIs.
-
-If [RFC 7808] is to be used, the problem details object would have to be extended with additional members.
+[RFC 7807] defines a "problem detail" as a way to carry machine-readable details of errors in an HTTP response to avoid the need to define new error response formats for HTTP APIs. If [RFC 7807] is to be used, the problem details object would have to be extended with additional members and could look as follows:
 
 
 ```
@@ -539,4 +568,17 @@ Content-Language: en
 
 In summary, there is currently no standard way to supply a list of supported languages.
 
-The parts in this specification regarding the 406 HTTP status code are inspired by discussions on Stack Overflow ([SO1], [SO2]) and on chapter 7 in [Alla].
+As long as the response body supplied in a machine-readable format, such as JSON, sent with HTTP status code 406, is not standardised, it is not possible to build applications, such as the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu/), that can programmatically access a list of supported languages and display that information to an end user. In addition, the return of HTTP status code 406 is only a recommendation, an implementation may choose use return HTTP status code 200 and return a default representation.
+
+A workaround for programmatical access to a list of supported languages could be the following procedure:
+1. Retrieve a list of languages of interest
+    - For a EU-wide application, this could be a list of all EU official languages.
+    - For another application, this could be a list of languages chosen by an end user.
+2. For each language of interest, issue an HTTP HEAD request to the landing page (`/`) with HTTP header `Accept-Language` set to `language_of_interest_tag,*;q=0.0` (e.g. `en,*;q=0.0`).
+3. For every response: if the HTTP status code of the response is 200, add the language specified in `Content-Language` to the list of supported languages.
+
+This workaround presumes that the following requirements and recommendations are followed:
+- [Recommendation 2 of OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_http_1_1), regarding the support of HTTP method HEAD
+- **/req/multilinguality/accept-language-header** and **/rec/multilinguality/content-negotiation** regarding support for `Accept-Language` and `Content-Language`
+
+The parts in this specification regarding the 406 HTTP status code are inspired by discussions on Stack Overflow (\[[SO1]\], \[[SO2]\]) and on chapter 7 in \[[Alla10]\].
