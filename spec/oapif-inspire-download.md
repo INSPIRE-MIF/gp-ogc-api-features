@@ -73,7 +73,7 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 - **[ISO 19115-2:2019](https://schemas.isotc211.org/schemas/19115/-2/gmi/1.0/gmi.xsd)** - ISO 19115-2:2019, *Geographic information — Metadata — Part 2: Extensions for acquisition and processing*
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)** - OGC API - Features - Part 1: Core<sup> 2</sup>
-- **[OpenAPI 3.0](https://swagger.io/docs/specification/about)** - OpenAPI specification v3.0 
+- **[OpenAPI 3.0]** - OpenAPI Initiative (OAI). *OpenAPI Specification*. The latest patch version at the time of publication of this document was 3.0.3, published in February 2020.
 - **[IRs for NS]** - European Commission Regulation 1088/2010 of 23 November 2010 amending Regulation (EC) No 976/2009 as regards download services and transformation services
 - **[IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089)** - European Commission Regulation 1089/2010 implementing Directive 2007/2/EC as regards interoperability of spatial data sets and services
 - **[RFC 4647]** - Internet Engineering Task Force (IETF). RFC 4647, *Matching of Language Tags*. September 2006
@@ -85,6 +85,7 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1088 "Implementing Rules for Network Services"
+[OpenAPI 3.0]: http://spec.openapis.org/oas/v3.0.3 "OpenAPI Specification 3.0"
 [RFC 4647]: https://www.rfc-editor.org/rfc/rfc4647 "Matching of Language Tags"
 [RFC 5646]: https://www.rfc-editor.org/rfc/rfc5646 "Tags for Identifying Languages"
 [RFC 7231]: https://www.rfc-editor.org/rfc/rfc7231 "HTTP/1.1: Semantics and Content"
@@ -205,13 +206,27 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 1. Check all collection names for a recognised language neutral name
 2. If no language-neutral name is available - MANUAL TEST: Check that the collections have not yet been harmonised.
 
+#### Terms of use
+
 | **Requirement** | **/req/pre-defined/licence** |
 | --- | --- |
-| A | The Web API shall contain a link to the licence of the data set made available. |
+| A | The Web API SHALL contain a link to the licence of the data set in the `links` property of the response of the request to `/collections` (relation: `/license`). |
+
+**NOTE** This is an enforcement of subrecommendation B of recommendation http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-license in [OAPIF].
+
+**OUTSTANDING ISSUE**: Can we in INSPIRE have datasets where different licences would apply for different parts of a dataset? In other words, should the requirement enforce either subrecommendation A or B to be followed, and not just B?
+
+**TEST**
+1. Issue an HTTP GET request to `{root}/collections`.
+2. Validate that at least one of the links returned in the response has `rel` link parameter `license`.
+3. For each of the links returned in the response having a `rel` link parameter equal to `license`, issue an HTTP GET request to the path given in the `href` link parameter of that link.
+4. For each of the responses, validate that the HTTP status code is 200.
 
 | **Recommendation** | **/rec/pre-defined/license-openapi** |
 | --- | --- |
-| A | The license information for the exposed data set SHOULD be provided in accordance with OpenAPI 3.0. A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi) |
+| A | The licence information for the exposed data set SHOULD be provided in accordance with [OpenAPI 3.0]. |
+
+**OUTSTANDING ISSUE**: A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi)
 
 ### 7.3. Requirements class INSPIRE-multilinguality <a name="req-multilinguality"></a>
 
