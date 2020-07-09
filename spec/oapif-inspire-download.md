@@ -4,6 +4,7 @@
 `Date: 2020-05-03`
 
 ## Table of Contents
+
 * [1. Introduction](#introduction)
 * [2. Scope](#scope)
 * [3. Conformance](#conformance)
@@ -12,17 +13,21 @@
 * [6. Symbols and abbreviated terms](#symbols-and-abbreviated-terms)
 * [7. INSPIRE Download Services based on OAPIF](#inspire-oapif)
     * [7.1. Main principles](#main-principles)
-    * [7.2. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”](#req-pre-defined)
-    * [7.3. Requirements class “INSPIRE-multilinguality”](#req-multilinguality)
-    * [7.4. Requirements class “INSPIRE-OAPIF-GeoJSON”](#req-oapif-json)
-    * [7.5. Requirements class "INSPIRE-bulk-download"](#req-bulk-download)
-* [8. Bibliography](#bibliography)
+    * [7.2. OAPIF Resources](#resources)
+* [8. Requirements classes](#req-classes)
+    * [8.1. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”](#req-pre-defined)
+    * [8.2. Requirements class “INSPIRE-multilinguality”](#req-multilinguality)
+    * [8.3. Requirements class “INSPIRE-OAPIF-GeoJSON”](#req-oapif-json)
+    * [8.4. Requirements class "INSPIRE-bulk-download"](#req-bulk-download)
+* [9. Example](#example)
+* [10. Bibliography](#bibliography)
 * [Annex A: Abstract Test Suite](#ats)
 * [Annex B: Mapping the requirements from the IRs to the OGC  API - Features standard (and extensions)](#ir2oapif)
 * [Annex C: Mapping between INSPIRE Network services metadata and OpenAPI definitions](#inspire-ns-openapi)
 * [Annex D: Supported languages](#supported-lang)
 
 ## 1. Introduction <a name="introduction"></a>
+
 This document proposes a technical approach for implementing the requirements set out in the [INSPIRE Implementing Rules for download services](http://data.europa.eu/eli/reg/2009/976/oj) based on the newly adopted [OGC API - Features standard](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html). 
 
 Several possible solutions for implementing download services are already endorsed by the INSPIRE Maintenance and Implementation (MIG) group. [Technical guidelines documents](https://inspire.ec.europa.eu/Technical-Guidelines2/Network-Services/41) are available that cover implementations based on ATOM, WFS 2.0, WCS and SOS. 
@@ -46,8 +51,11 @@ For further details about the standard, see the official [OGC API - Features web
 For a description of the main differences between WFS 2.0 and OGC API - Features, see [this section in the Guide on OGC API - Features](https://github.com/opengeospatial/ogcapi-features/blob/master/guide/section_8_WFS_2_0_v_3_0.adoc).
 
 ## 2. Scope <a name="scope"></a>
+
 This document proposes a technical approach for implementing the requirements set out in the [INSPIRE Implementing Rules for download services](http://data.europa.eu/eli/reg/2009/976/oj) based on the [OGC API - Features standard](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html). The approach described here is not legally binding and shows one of several ways of implementing INSPIRE Download services.
+
 ## 3. Conformance <a name="conformance"></a>
+
 This specification defines the following requirements classes:
 
 - [INSPIRE-pre-defined-data-set-download-OAPIF (mandatory)](#req-pre-defined)
@@ -91,18 +99,19 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 [RFC 7231]: https://www.rfc-editor.org/rfc/rfc7231 "HTTP/1.1: Semantics and Content"
 
 ## 5. Terms and definitions <a name="terms-and-definitions"></a>
+
 For the purposes of this document, the following terms and definitions apply:
 
-| Term | Definition | Source
-| --- | --- | ---|
-| content negotiation | The practice of providing multiple representations available via the same URI | [ISO/IEC 19788](https://www.iso.org/obp/ui/#iso:std:iso-iec:19788:-7:ed-1:v1:en:sec:3.20)
-| data set | Identifiable collection of data. | [ISO 19115](https://www.iso.org/obp/ui/#iso:std:iso:19115:-2:ed-2:v1:en:sec:3.6)
-| distribution (of a data set) | A specific representation of a data set. A data set might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above). | [DCAT](https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution)
+| Term | Definition | Source |
+| --- | --- | --- |
+| content negotiation | The practice of providing multiple representations available via the same URI | [ISO/IEC 19788](https://www.iso.org/obp/ui/#iso:std:iso-iec:19788:-7:ed-1:v1:en:sec:3.20) |
+| data set | Identifiable collection of data. | [ISO 19115](https://www.iso.org/obp/ui/#iso:std:iso:19115:-2:ed-2:v1:en:sec:3.6) |
+| distribution (of a data set) | A specific representation of a data set. A data set might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above). | [DCAT](https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution) |
 | direct access download service | Download Service which provides access to the Spatial Objects in Spatial Data Sets based upon a query | [IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32010R1088&from=EN) |
 | encoding | Conversion of data into a series of codes. | [ISO 19118](https://www.iso.org/obp/ui/#iso:std:iso:19118:ed-2:v1:en:term:4.13) |
 | encoding rule | Identifiable collection of conversion rules that define the encoding for a particular data structure. | [ISO 19118](https://www.iso.org/obp/ui/#iso:std:iso:19118:ed-2:v1:en:term:4.14) |
 | feature | Abstraction of real world phenomena. **NOTE** The concept of a `feature` is synonymous to a `spatial object` in INSPIRE | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature) |
-| feature collection | A set of features from a data set. | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection)
+| feature collection | A set of features from a data set. | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection) |
 | feature type | **NOTE** The concept of a `feature type` is synonymous to a `spatial object type` in INSPIRE | [INSPIRE](https://inspire.ec.europa.eu/glossary/SpatialObject) |
 | pre-defined data set download service | Service that enables copies of spatial data sets, or parts of such sets, to be downloaded. | [IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20101228&from=EN) |
 | Web API | API using an architectural style that is founded on the technologies of the Web. | [DWBP](https://www.w3.org/TR/dwbp) |
@@ -113,6 +122,7 @@ For the purposes of this document, the following terms and definitions apply:
 - [INSPIRE glossary](http://inspire.ec.europa.eu/glossary)
 
 ## 6. Symbols and abbreviated terms <a name="symbols-and-abbreviated-terms"></a>
+
 | Abbreviation | Term |
 | --- | --- |
 | API |	Application Programming Interface |
@@ -123,8 +133,11 @@ For the purposes of this document, the following terms and definitions apply:
 | OAPIF | OGC API - Features |
 | URL |	Uniform Resource Locator |
 | WFS | Web Feature Service |
+
 ## 7. INSPIRE Download Services based on OAPIF <a name="inspire-oapif"></a>
+
 This section describes the requirements a Web API shall fulfill in order to be compliant with both ‘OGC API – Features’ and INSPIRE requirements for download services.
+
 ### 7.1. Main principles <a name="main-principles"></a>
 
 - A Web API provides data from one data set. This means that one data publisher often will need to provide more than one Web API.
@@ -139,7 +152,7 @@ The mapping between INSPIRE resources and OAPIF resources is given below, for an
 | INSPIRE resource | OAPIF resource | Sample path | Document reference |
 | ------------- | ------------- | ------------- |-------------: |
 | (Distribution<sup> 3</sup> of a) data set | Landing page | https://developer.my-org.eu/apis/addresses/ | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
-| Data set metadata | Feature collections | https://developer.my-org.eu/apis/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)
+| Data set metadata | Feature collections | https://developer.my-org.eu/apis/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) |
 | -- | Feature collection | https://developer.my-org.eu/apis/addresses/collections/address | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
 | Spatial objects | Features | https://developer.my-org.eu/apis/addresses/collections/address/items | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
 | Spatial object | Feature | https://developer.my-org.eu/apis/addresses/collections/address/items/{featureId} | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
@@ -151,13 +164,21 @@ The principle that a Web API provides data from one data set is in line with OGC
 > By default, every API implementing this standard will provide access to a single dataset.
 
 > A server that implements this conformance class provides access to the features in a dataset. In other words, the API is a distribution of that dataset. A file download, for example, would be another distribution.
+
+### 7.2. OAPIF Resources <a name="resources"></a>
+
+The figure below illustrates the resources defined by OGC API – Features, and the links that are required by the depicted requirements classes, including the link relation types to be used.
+
+![Resources and relations between them](figures/resources.png)
+
+## 8. Requirements classes <a name="req-classes"></a>
  
-### 7.2. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”  <a name="req-pre-defined"></a>
+### 8.1. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”  <a name="req-pre-defined"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/pre-defined |
 | --- | --- |
 | Target type | Web API |
-| Dependency | [OAPIF Requirements class "OpenAPI 3.0"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0)
+| Dependency | [OAPIF Requirements class "OpenAPI 3.0"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0) |
 
 The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0), and therefore also on the [OAPIF Requirements class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core), for providing access to INSPIRE data.
 
@@ -210,7 +231,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 | **Requirement** | **/req/pre-defined/licence** |
 | --- | --- |
-| A | The Web API SHALL contain a link to the licence of the data set in the `links` property of the response of the request to `/collections` (relation: `/license`). |
+| A | The Web API SHALL contain a link to the licence of the data set in the `links` property of the response of the request to `/collections` (relation: `license`). |
 
 **NOTE** This is an enforcement of subrecommendation B of recommendation http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-license in [OAPIF].
 
@@ -228,7 +249,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 **OUTSTANDING ISSUE**: A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi)
 
-### 7.3. Requirements class INSPIRE-multilinguality <a name="req-multilinguality"></a>
+### 8.2. Requirements class INSPIRE-multilinguality <a name="req-multilinguality"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/multilinguality |
 | --- | --- |
@@ -281,7 +302,7 @@ An `Accept-Language` HTTP header that contains `*;q=0.0`, e.g. `en;q=1.0,*;q=0.0
 2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, validate that the `hreflang` parameter is present.
 3. Check that the `hreflang` parameter contains a language encoded in accordance with [RFC 4647].
 
-### 7.4. Requirements class “INSPIRE-OAPIF-GeoJSON” <a name="req-oapif-json"></a>
+### 8.3. Requirements class “INSPIRE-OAPIF-GeoJSON” <a name="req-oapif-json"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/geojson |
 | --- | --- |
@@ -296,7 +317,7 @@ This requirements class is relevant when providing access to INSPIRE data encode
 | --- | --- |
 | A | For each `collection` which is encoded as GeoJSON and provides harmonised data according to the [[IRs for ISDSS]](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), the Web API SHOULD follow the [INSPIRE UML-to-GeoJSON encoding rule.](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md) |
 
-### 7.5. Requirements class “INSPIRE-bulk-download” <a name="req-bulk-download"></a>
+### 8.4. Requirements class “INSPIRE-bulk-download” <a name="req-bulk-download"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/bulk-download |
 | --- | --- |
@@ -309,7 +330,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | --- | --- |
 | A | The response of the `/collections` operation SHALL include at least one `enclosure` link that allows requesting a representation of the whole data set. |
 
- :exclamation: There is an outstanding issue on whether to use `enclosure` or something else, see https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/22
+**OUTSTANDING ISSUE**: There is an outstanding issue on whether to use `enclosure` or something else, see https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/22
 
 **TEST**
 
@@ -342,7 +363,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | --- | --- |
 | A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter containing a human-friendly name. |
 
-### 7.6. Example
+## 9. Example <a name="example"></a>
 
 **EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
@@ -406,33 +427,18 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 }
 ```
 
-## 8. Bibliography <a name="bibliography"></a>
-- \[Alla10\] ALLAMARAJU, Subbu. *RESTful Web services cookbook*. O’Reilly
-Media, 2010. ISBN 978-0-596-80168-7.
-- \[Dodd16\] DODDS, Leigh. Why are bulk downloads of open data important?
-*Lost Boy* \[online\]. 19 September 2016. \[Viewed 4 March 2020\].
-Available from:
-<https://blog.ldodds.com/2016/09/19/why-are-bulk-downloads-of-open-data-important/>
-- \[DWBP\] LÓSCIO, Bernadette Farias, BURLE, Caroline and CALEGARI,
-Newton, eds. *Data on the Web Best Practices* \[online\]. W3C
-Recommendation. World Wide Web Consortium, 31 January 2017. Available
-from: <https://www.w3.org/TR/dwbp/>
+## 10. Bibliography <a name="bibliography"></a>
+
+- \[Alla10\] ALLAMARAJU, Subbu. *RESTful Web services cookbook*. O’Reilly Media, 2010. ISBN 978-0-596-80168-7.
+- \[Dodd16\] DODDS, Leigh. Why are bulk downloads of open data important? *Lost Boy*. 19 September 2016. \[Viewed 4 March 2020\]. Available from: <https://blog.ldodds.com/2016/09/19/why-are-bulk-downloads-of-open-data-important/>
+- \[DWBP\] W3C. *Data on the Web Best Practices*. W3C Recommendation. 31 January 2017. Available from: <https://www.w3.org/TR/dwbp/>
 - \[GCloud-REST\] *REST Guidelines of Belgian government institutions*. Available from: <https://www.gcloud.belgium.be/rest/>
 - [INSPIRE UML-to-GeoJSON encoding rule](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md)
-- \[OD\] *Open Definition* \[online\]. Version 2.1. Open Knowledge
-Foundation, November 2015. Available from:
-<https://opendefinition.org/od/2.1>
-- \[MDN\] MDN. *406 Not Acceptable - HTTP | MDN*.  Available from: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406>
-- \[SDWBP\] TANDY, Jeremy, VAN DEN BRINK, Linda and BARNAGHI, Payam, eds.
-*Spatial Data on the Web Best Practices* \[online\]. W3C Working Group
-Note & OGC Best Practice. World Wide Web Consortium, 28 September 2017.
-Available from: <https://www.w3.org/TR/sdw-bp/>
-- \[SO1\] How to properly send 406 status code? *Stack Overflow*
-\[online\]. \[Viewed 4 March 2020\]. Available from:
-<https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
-- \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*
-\[online\]. \[Viewed 4 March 2020\]. Available from:
-<https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
+- \[OD\] *Open Definition*. Version 2.1. Open Knowledge Foundation, November 2015. Available from: <https://opendefinition.org/od/2.1>
+- \[MDN\] MDN. *406 Not Acceptable - HTTP \| MDN*.  Available from: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406>
+- \[SDWBP\] W3C. *Spatial Data on the Web Best Practices*. W3C Working Group Note & OGC Best Practice. 28 September 2017. Available from: <https://www.w3.org/TR/sdw-bp/>
+- \[SO1\] How to properly send 406 status code? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
+- \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [Alla10]: https://www.oreilly.com/library/view/restful-web-services/9780596809140/ "RESTful Web services cookbook"
@@ -443,8 +449,11 @@ Available from: <https://www.w3.org/TR/sdw-bp/>
 [RFC 7807]: https://www.rfc-editor.org/info/rfc7807 "Problem Details for HTTP APIs"
 
 # Annex A: Abstract Test Suite <a name="ats"></a>
+
 **NOTE** Detailed ATS will be developed in the next version of the document, based on the descriptions of tests included in the main body of the specification for each requirement.
+
 # Annex B: Mapping the requirements from the IRs to the OGC-API Features standard (and extensions) <a name="ir2oapif"></a>
+
 **NOTE** A [draft mapping](https://webgate.ec.europa.eu/fpfis/wikis/download/attachments/332217789/%5BDOC-6%5D%20IRs-WFS3.0%20mapping%20discussion%20paper%20v1.2.pdf?api=v2) between the requirements from the IRs to the OGC-API Features standard has been proposed and discussed in the INSPIRE MIG-T. This section will be completed based on this discussion paper once this specification is stable. 
 
 # Annex C: Mapping between INSPIRE NS Metadata elements and OpenAPI definition fields  <a name="inspire-ns-openapi"></a>
@@ -453,24 +462,24 @@ This guidance document proposes a lightweight mapping approach between INSPIRE N
 
 | INSPIRE NS Metadata element | OpenAPI field names |
 | ------------ | ------------ |
-Resource Title (M) | info/title
-Resource Abstract (M) | info/description
-Resource Type (M) |
-Resource Locator (C) | 
-Coupled Resource (C) | 
-Spatial Data Service Type (M) 
-Keyword (M) | 
-Geographic Bounding Box (M)
-Temporal Reference (M)
-Spatial Resolution (C)
-Conformity* (M)
-Conditions for Access and Use (M) | info/termsOfService or info/license
-Limitations on Public Access (M) | info/termsOfService or info/license
-Responsible Organisation (M) info/contact/name
-Metadata Point of Contact (M) | info/contact/name
-Metadata Date (M) 
-Metadata Language (M) 
-Unique Resource Identifier (M)
+Resource Title (M) | info/title |
+Resource Abstract (M) | info/description |
+Resource Type (M) | |
+Resource Locator (C) | |
+Coupled Resource (C) | |
+Spatial Data Service Type (M) | |
+Keyword (M) | |
+Geographic Bounding Box (M) | |
+Temporal Reference (M) | |
+Spatial Resolution (C) | |
+Conformity* (M) | |
+Conditions for Access and Use (M) | info/termsOfService or info/license |
+Limitations on Public Access (M) | info/termsOfService or info/license |
+Responsible Organisation (M) info/contact/name |
+Metadata Point of Contact (M) | info/contact/name |
+Metadata Date (M)  | |
+Metadata Language (M)  | |
+Unique Resource Identifier (M) | |
 
 --- 
 **NOTE** Additional metadata elements can be added to an OpenAPI definition through [extensions](https://swagger.io/docs/specification/openapi-extensions/), implemented through the introduction of fields beginning with `x-`. However, in order to streamline the implementation of metadata, this document does not propose any INSPIRE-specific extensions. 
@@ -511,7 +520,7 @@ According to [RFC 7231]:
 > the user agent, as determined by shared design or content
 > negotiation, or in some commonly accepted hypertext format.
 
-Depending on the context, different guidelines are given on what HTTP status code to return when language negotiation fails. E.g., according to the [MDN web docs][MDN], 406 is very rarely used, servers ignore the header and serve an actual page to the user. Certain API guidelines, such as the [REST Guidelines of Belgian government institutions][GCloud-REST], prescribe that a server should return a 406 Not Acceptable error if it could not honor any of the requested languages.
+Depending on the context, different guidelines are given on what HTTP status code to return when language negotiation fails. E.g., according to \[[MDN]\], 406 is very rarely used, servers ignore the header and serve an actual page to the user. Certain API guidelines, such as the \[[GCloud-REST]\], prescribe that a server should return a 406 Not Acceptable error if it could not honor any of the requested languages.
 
 [RFC 7231] does not define what a response body returned with HTTP status code 406, as mentioned in recommendation **/rec/multilinguality/accept-language-header-no-matching-language-tag** exactly should look like, and no other existing specifications have been identified that define this. As one of the principles in this specification is not to have any INSPIRE-specific extensions or requirements, this specification therefore does not give a stronger recommendation. This specification may be updated if/when the response body returned with HTTP status code 406 is standardised.
 
@@ -540,7 +549,7 @@ Content-Language: en
 </html>
 ```
 
-Similar to the example described on [Stack Overflow][SO2], this could look as follows when JSON is acceptable for the client:
+Similar to the example described on \[[SO2]\], this could look as follows when JSON is acceptable for the client:
 
 ```
 # Request
