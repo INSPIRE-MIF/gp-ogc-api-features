@@ -17,10 +17,10 @@
 
 ## Main outcomes
 
- - Work group members agree to work together for submitting the good practice before the forthcoming MIG meeting in the autumn of 2020 (26-27 November, tbc)
+ - Work group members agree to work together on submitting the INSPIRE good practice before the forthcoming MIG meeting in the autumn of 2020 (26-27 November, tbc)
  - The main working environment will be GitHub. A dedicated issue template for describing deployments of OGC API - Features will be prepared by the JRC
  - A roadmap was discussed and agreed. See the presentation under Item 1 of the agenda (above)
- - The working group agrees to meet on a monthly basis with more frequent meetings in the autum
+ - The working group agrees to meet on a monthly basis with more frequent meetings in the autumn
 
 
   
