@@ -7,8 +7,6 @@ assignees: ''
 
 ---
 
-# Deployment title
-
 ## 1. Data provider
 * provide the name of the data provider/project
 
