@@ -1,12 +1,3 @@
----
-name: Deployment template
-about: Describes a deployment of the OGC API - Features as an INSPIRE Download service
-title: "[DEPLOYMENT]"
-labels: deployment
-assignees: ''
-
----
-
 ## 1. Data provider
 * National Land Survey of Finland
 
