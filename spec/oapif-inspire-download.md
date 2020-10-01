@@ -231,7 +231,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 | **Requirement** | **/req/pre-defined/feature-concept-dictionary** |
 | --- | --- |
-| A | For each `collection` that provides data that is harmonised according to the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089) one link with the link relation type `tag` to the corresponding entry in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept). 
+| A | For each `collection` that provides data that is harmonised according to the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), a link with the link relation type `tag` to the corresponding entry in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) SHALL be included.
 
 | **Recommendation** | **/rec/pre-defined/collection-naming** |
 | --- | --- |
@@ -379,13 +379,13 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 **EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
-- This feature collections example response in JSON is for a data set with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
+- This feature collections example response in JSON is for a data set with a single collection "building". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
 
 - Representations of the resource in other formats are referenced using link relation type `alternate`.
 
 - An additional link is to a GML application schema for the data set - using link relation type `describedby`.
 
-- There are also links to the license information for the building data (using link relation type `license`).
+- There are also links to the license information for the data set (using link relation type `license`).
 
 - Finally, the link with the link relation type `enclosure` provides a reference to another distribution of the data set as a GeoPackage download of the complete data set (pre-defined download). The `length` property includes the size in bytes of the data set.
 
@@ -408,11 +408,19 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
     "rel": "enclosure",
     "type": "application/geopackage+sqlite3",
     "title": "Download the dataset as a GeoPackage (CRS: EPSG:25832)",
-    "length": 472546 }
+    "length": 472546 },
+  { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "rel": "license",
+    "type": "text/html",
+    "title": "CC0-1.0" },
+  { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+    "rel": "license",
+    "type": "application/rdf+xml",
+    "title": "CC0-1.0" }
   ],
   "collections": [
   {
-    "id": "buildings",
+    "id": "building",
     "title": "Buildings",
     "description": "Buildings in the city of Bonn.",
     "extent": {
@@ -424,15 +432,14 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
       }
     },
     "links": [
-      { "href": "http://my-org.eu/collections/buildings/items",
-        "rel": "items", "type": "application/geo+json",
+      { "href": "https://developer.my-org.eu/apis/buildings/collections/building/items",
+        "rel": "items",
+        "type": "application/geo+json",
         "title": "Buildings" },
-      { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "rel": "license", "type": "text/html",
-        "title": "CC0-1.0" },
-      { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
-        "rel": "license", "type": "application/rdf+xml",
-        "title": "CC0-1.0" }
+      { "href": "https://inspire.ec.europa.eu/featureconcept/Building",
+        "rel": "tag",
+        "type": "application/json",
+        "title": "Feature concept Building" }
     ]
   }
   ]
