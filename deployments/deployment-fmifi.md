@@ -26,7 +26,7 @@ All used software is OSS with MIT license.
 
 ## 6. Endpoints and client applications
 
-[http://inspire-oapif-demoloadbalancer-1863525030.eu-west-1.elb.amazonaws.com/](http://inspire-oapif-demoloadbalancer-1863525030.eu-west-1.elb.amazonaws.com/)
+[https://weather.obs.fmibeta.com](https://weather.obs.fmibeta.com)
 
 ## 7. Issues
 
