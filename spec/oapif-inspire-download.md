@@ -1,7 +1,7 @@
 # Setting up an INSPIRE Download service based on the OGC API-Features standard
 
-`Version: 0.2`
-`Date: 2020-05-03`
+`Version: 0.3`
+`Date: 2020-09-11`
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@
     * [7.1. Main principles](#main-principles)
     * [7.2. OAPIF Resources](#resources)
 * [8. Requirements classes](#req-classes)
-    * [8.1. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”](#req-pre-defined)
+    * [8.1. Requirements class  “INSPIRE-pre-defined-data-set-download-OAPIF”](#req-pre-defined)
     * [8.2. Requirements class “INSPIRE-multilinguality”](#req-multilinguality)
     * [8.3. Requirements class “INSPIRE-OAPIF-GeoJSON”](#req-oapif-json)
     * [8.4. Requirements class "INSPIRE-bulk-download"](#req-bulk-download)
@@ -28,13 +28,13 @@
 
 ## 1. Introduction <a name="introduction"></a>
 
-This document proposes a technical approach for implementing the requirements set out in the [INSPIRE Implementing Rules for download services](http://data.europa.eu/eli/reg/2009/976/oj) based on the newly adopted [OGC API - Features standard](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html). 
+This document proposes a technical approach for implementing the requirements set out in the [INSPIRE Implementing Rules for download services](http://data.europa.eu/eli/reg/2009/976/oj) based on the newly adopted [OGC API - Features standard](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).
 
-Several possible solutions for implementing download services are already endorsed by the INSPIRE Maintenance and Implementation (MIG) group. [Technical guidelines documents](https://inspire.ec.europa.eu/Technical-Guidelines2/Network-Services/41) are available that cover implementations based on ATOM, WFS 2.0, WCS and SOS. 
+Several possible solutions for implementing download services are already endorsed by the INSPIRE Maintenance and Implementation (MIG) group. [Technical guidelines documents](https://inspire.ec.europa.eu/Technical-Guidelines2/Network-Services/41) are available that cover implementations based on ATOM, WFS 2.0, WCS and SOS.
 
-While all of these approaches use the Web for providing access to geospatial data, the new family of OGC API standards aim to be more developer friendly by requiring less up-front knowledge of the standard involved. The rapid emergence of Web APIs provide a flexible and easily understandable means for access to data, as recommended by the W3C Data on the Web Best Practices [DWBP Best Practice 23](https://www.w3.org/TR/dwbp/#accessAPIs) and [DWBP Best Practice 24](https://www.w3.org/TR/dwbp/#APIHttpVerbs). 
+While all of these approaches use the Web for providing access to geospatial data, the new family of OGC API standards aim to be more developer friendly by requiring less up-front knowledge of the standard involved. The rapid emergence of Web APIs provide a flexible and easily understandable means for access to data, as recommended by the W3C Data on the Web Best Practices [DWBP Best Practice 23](https://www.w3.org/TR/dwbp/#accessAPIs) and [DWBP Best Practice 24](https://www.w3.org/TR/dwbp/#APIHttpVerbs).
 
-Therefore, this document describes an additional option for the implementation of INSPIRE download services. 
+Therefore, this document describes an additional option for the implementation of INSPIRE download services.
 
 In order to facilitate the use of off-the-shelf software implementing the OGC API - Features standard (OAPIF) to meet the requirements in this document, INSPIRE-specific extensions are limited to the absolute minimum. Where several implementation options exist, this document describes the specific way of application of the OAPIF and associated standards to meet the requirements of the INSPIRE Implementing Rules for download services.
 
@@ -46,7 +46,7 @@ OGC API - Features provides API building blocks to create, modify and query feat
 
 By default, every API implementing this standard will provide access to a single data set. Rather than sharing the data as a complete data set, the OGC API - Features standards offer direct, fine-grained access to the data at the feature (object) level. Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
 
-For further details about the standard, see the official [OGC API - Features website](https://www.opengeospatial.org/standards/ogcapi-features). 
+For further details about the standard, see the official [OGC API - Features website](https://www.opengeospatial.org/standards/ogcapi-features).
 
 For a description of the main differences between WFS 2.0 and OGC API - Features, see [this section in the Guide on OGC API - Features](https://github.com/opengeospatial/ogcapi-features/blob/master/guide/section_8_WFS_2_0_v_3_0.adoc).
 
@@ -69,7 +69,7 @@ The requirements classes and their dependencies are illustrated in the figure be
 
 ![Overview of dependencies](figures/dependencies.png)
 
-Future versions of this specification may include further conformance classes, in particular for 
+Future versions of this specification may include further conformance classes, in particular for
 - direct access download,
 - quality of service, and
 - support for additional CRS.
@@ -87,7 +87,7 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 - **[RFC 4647]** - Internet Engineering Task Force (IETF). RFC 4647, *Matching of Language Tags*. September 2006
 - **[RFC 5646]** - Internet Engineering Task Force (IETF). RFC 5646, *Tags for Identifying Languages*. September 2009
 - **[RFC 7231]** - Internet Engineering Task Force (IETF). RFC 7231, *Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content*. June 2014
-- **[RSS 2.0](http://www.rssboard.org/rss-draft-1)** - Really Simple Syndication Specification (RSS 2.0) Specification 
+- **[RSS 2.0](http://www.rssboard.org/rss-draft-1)** - Really Simple Syndication Specification (RSS 2.0) Specification
 
 <sup>2 </sup> The standard is in the process of being released as [ISO 19168-1](https://www.iso.org/standard/32586.html).
 
@@ -125,13 +125,13 @@ For the purposes of this document, the following terms and definitions apply:
 
 | Abbreviation | Term |
 | --- | --- |
-| API |	Application Programming Interface |
+| API |    Application Programming Interface |
 | CRS | Coordinate Reference System |
 | DCAT | Data Catalog Vocabulary |
 | GML | Geography Markup Language |
 | JSON | JavaScript Object Notation |
 | OAPIF | OGC API - Features |
-| URL |	Uniform Resource Locator |
+| URL |    Uniform Resource Locator |
 | WFS | Web Feature Service |
 
 ## 7. INSPIRE Download Services based on OAPIF <a name="inspire-oapif"></a>
@@ -191,6 +191,11 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 **NOTE 4** There are plans to add additional requirements classes for other API description standards (or standard versions) in the future (e.g. for OpenAPI v3.1). When additional requirements classes become available, this specification will be reviewed and possibly revised to include these as additional options.
 
+**NOTE 5** For cases where data sets are too big for retrieval with a single API request, using multiple requests following the `next` links (paging) [TODO: add link that explains paging] is considered to meet the requirements for a download service. This will also help to support frequently updated data sets.
+
+**NOTE 6** To support browser-based applications accessing the API directly, it is common practice to support [cross-origin requests](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#cross_origin).
+
+
 #### Metadata elements of the data set
 
 | **Requirement** | **/req/pre-defined/spatial-data-set-metadata** |
@@ -206,6 +211,11 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
     - The document has root element `{http://www.isotc211.org/2005/gmd}MD_Metadata`.
     - The document has root element `{http://standards.iso.org/iso/19115/-2/gmi/1.0}MI_Metadata`.
 
+| **Recommendation** | **/rec/pre-defined/spatial-data-set-metadata-html** |
+| --- | --- |
+| A | If the API implements the HTML requirements class, the response of the `/collections` operation SHOULD include a link to the metadata record for the data set with `rel` link parameter `describedby` and `type` link parameter `text/html`. |
+
+
 **NOTE** If the data set is available in GML, the link to the GML application schema of the data set will also have `rel` link parameter `describedby` and `type` link parameter `application/xml`.
 
 #### Organisation of a data set in feature collections
@@ -219,13 +229,18 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 **TEST**
 1. Manual check for every collection, that all its features belong to the same feature type.
 
-| **Requirement** | **/req/pre-defined/collection-naming** |
+| **Requirement** | **/req/pre-defined/feature-concept-dictionary** |
 | --- | --- |
-| A | For each `collection` that provides data that is harmonised according to the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), the id of the collection SHALL be the the lowercase version of the language-neutral name of the feature type as specified in the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089). |
+| A | For each `collection` that provides data that is harmonised according to the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), a link with the link relation type `tag` to the corresponding entry in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) SHALL be included.
 
-**TEST** 
-1. Check all collection names for a recognised language neutral name
-2. If no language-neutral name is available - MANUAL TEST: Check that the collections have not yet been harmonised.
+| **Recommendation** | **/rec/pre-defined/collection-naming** |
+| --- | --- |
+| A | For each `collection` that provides data that is harmonised according to the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), the id of the collection SHOULD be the lowercase version of the language-neutral name of the feature type as specified in the [IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089). | 
+
+
+**TEST**
+1. Check all collections for a valid link to the INSPIRE feature concept dictionary.
+2. If no link is available - MANUAL TEST: Check that the collections have not yet been harmonised.
 
 #### Terms of use
 
@@ -328,20 +343,17 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 | **Requirement** | **/req/pre-defined/enclosure** |
 | --- | --- |
-| A | The response of the `/collections` operation SHALL include at least one `enclosure` link that allows requesting a representation of the whole data set. |
-
-**OUTSTANDING ISSUE**: There is an outstanding issue on whether to use `enclosure` or something else, see https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/22
+| A | At least one of the following conditions SHALL be met:<br>1. The response of the `/collections` operation includes at least one `enclosure` link that allows requesting a representation of the entire data set.<br>2. The response of each `/collections/{collectionId}` operation includes at least one `enclosure` link that allows requesting a representation of the entire feature collection. |
 
 **TEST**
 
-1. Issue an HTTP GET request to {root}/collections.
-2. Validate that at least one of the links returned in the response has `rel` link parameter `enclosure`.
+1. Issue an HTTP GET request to {root}/collections and to each {root}/collections/{collectionId}.
+2. Validate that the Collections response and/or each of the Collection responses have a link with the `rel` link parameter `enclosure`.
 3. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
 4. For each of the responses:
     - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inclusive.
     - If HTTP status code 200 is returned and HTTP header` Content-Length` > 0, the test verdict is “pass”.
     - Otherwise, the test verdict is “fail”.
-
 
 | **Requirement** | **/req/pre-defined/enclosure-type** |
 | --- | --- |
@@ -361,19 +373,19 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 | **Recommendation** | **/rec/pre-defined/enclosure-title** |
 | --- | --- |
-| A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter containing a human-friendly name. |
+| A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter. |
 
 ## 9. Example <a name="example"></a>
 
 **EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
-- This feature collections example response in JSON is for a data set with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
+- This feature collections example response in JSON is for a data set with a single collection "building". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
 
 - Representations of the resource in other formats are referenced using link relation type `alternate`.
 
 - An additional link is to a GML application schema for the data set - using link relation type `describedby`.
 
-- There are also links to the license information for the building data (using link relation type `license`).
+- There are also links to the license information for the data set (using link relation type `license`).
 
 - Finally, the link with the link relation type `enclosure` provides a reference to another distribution of the data set as a GeoPackage download of the complete data set (pre-defined download). The `length` property includes the size in bytes of the data set.
 
@@ -395,12 +407,20 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
   { "href": "https://download.my-org.eu/buildings.gpkg",
     "rel": "enclosure",
     "type": "application/geopackage+sqlite3",
-    "title": "Pre-defined data set download (GeoPackage)",
-    "length": 472546 }
+    "title": "Download the dataset as a GeoPackage (CRS: EPSG:25832)",
+    "length": 472546 },
+  { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "rel": "license",
+    "type": "text/html",
+    "title": "CC0-1.0" },
+  { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+    "rel": "license",
+    "type": "application/rdf+xml",
+    "title": "CC0-1.0" }
   ],
   "collections": [
   {
-    "id": "buildings",
+    "id": "building",
     "title": "Buildings",
     "description": "Buildings in the city of Bonn.",
     "extent": {
@@ -412,15 +432,14 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
       }
     },
     "links": [
-      { "href": "http://my-org.eu/collections/buildings/items",
-        "rel": "items", "type": "application/geo+json",
+      { "href": "https://developer.my-org.eu/apis/buildings/collections/building/items",
+        "rel": "items",
+        "type": "application/geo+json",
         "title": "Buildings" },
-      { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "rel": "license", "type": "text/html",
-        "title": "CC0-1.0" },
-      { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
-        "rel": "license", "type": "application/rdf+xml",
-        "title": "CC0-1.0" }
+      { "href": "https://inspire.ec.europa.eu/featureconcept/Building",
+        "rel": "tag",
+        "type": "application/json",
+        "title": "Feature concept Building" }
     ]
   }
   ]
@@ -429,16 +448,16 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 ## 10. Bibliography <a name="bibliography"></a>
 
-- \[Alla10\] ALLAMARAJU, Subbu. *RESTful Web services cookbook*. O’Reilly Media, 2010. ISBN 978-0-596-80168-7.
-- \[Dodd16\] DODDS, Leigh. Why are bulk downloads of open data important? *Lost Boy*. 19 September 2016. \[Viewed 4 March 2020\]. Available from: <https://blog.ldodds.com/2016/09/19/why-are-bulk-downloads-of-open-data-important/>
+- \[Alla10\] ALLAMARAJU, Subbu. *RESTful Web services cookbook*. O’Reilly Media, 2010. ISBN 978-0-596-80168-7.
+- \[Dodd16\] DODDS, Leigh. Why are bulk downloads of open data important? *Lost Boy*. 19 September 2016. \[Viewed 4 March 2020\]. Available from: <https://blog.ldodds.com/2016/09/19/why-are-bulk-downloads-of-open-data-important/>
 - \[DWBP\] W3C. *Data on the Web Best Practices*. W3C Recommendation. 31 January 2017. Available from: <https://www.w3.org/TR/dwbp/>
 - \[GCloud-REST\] *REST Guidelines of Belgian government institutions*. Available from: <https://www.gcloud.belgium.be/rest/>
 - [INSPIRE UML-to-GeoJSON encoding rule](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md)
 - \[OD\] *Open Definition*. Version 2.1. Open Knowledge Foundation, November 2015. Available from: <https://opendefinition.org/od/2.1>
 - \[MDN\] MDN. *406 Not Acceptable - HTTP \| MDN*.  Available from: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406>
 - \[SDWBP\] W3C. *Spatial Data on the Web Best Practices*. W3C Working Group Note & OGC Best Practice. 28 September 2017. Available from: <https://www.w3.org/TR/sdw-bp/>
-- \[SO1\] How to properly send 406 status code? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
-- \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
+- \[SO1\] How to properly send 406 status code? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
+- \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [Alla10]: https://www.oreilly.com/library/view/restful-web-services/9780596809140/ "RESTful Web services cookbook"
@@ -454,7 +473,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 # Annex B: Mapping the requirements from the IRs to the OGC-API Features standard (and extensions) <a name="ir2oapif"></a>
 
-**NOTE** A [draft mapping](https://webgate.ec.europa.eu/fpfis/wikis/download/attachments/332217789/%5BDOC-6%5D%20IRs-WFS3.0%20mapping%20discussion%20paper%20v1.2.pdf?api=v2) between the requirements from the IRs to the OGC-API Features standard has been proposed and discussed in the INSPIRE MIG-T. This section will be completed based on this discussion paper once this specification is stable. 
+**NOTE** A [draft mapping](https://webgate.ec.europa.eu/fpfis/wikis/download/attachments/332217789/%5BDOC-6%5D%20IRs-WFS3.0%20mapping%20discussion%20paper%20v1.2.pdf?api=v2) between the requirements from the IRs to the OGC-API Features standard has been proposed and discussed in the INSPIRE MIG-T. This section will be completed based on this discussion paper once this specification is stable.
 
 # Annex C: Mapping between INSPIRE NS Metadata elements and OpenAPI definition fields  <a name="inspire-ns-openapi"></a>
 
@@ -481,8 +500,8 @@ Metadata Date (M)  | |
 Metadata Language (M)  | |
 Unique Resource Identifier (M) | |
 
---- 
-**NOTE** Additional metadata elements can be added to an OpenAPI definition through [extensions](https://swagger.io/docs/specification/openapi-extensions/), implemented through the introduction of fields beginning with `x-`. However, in order to streamline the implementation of metadata, this document does not propose any INSPIRE-specific extensions. 
+---
+**NOTE** Additional metadata elements can be added to an OpenAPI definition through [extensions](https://swagger.io/docs/specification/openapi-extensions/), implemented through the introduction of fields beginning with `x-`. However, in order to streamline the implementation of metadata, this document does not propose any INSPIRE-specific extensions.
 
 # Annex D. Supported languages  <a name="supported-lang"></a>
 
@@ -495,7 +514,7 @@ According to [RFC 7231]:
 > either disregard the header field by treating the response as if it
 > is not subject to content negotiation or honor the header field by
 > sending a 406 (Not Acceptable) response.
-> 
+>
 > [...]
 >
 > The 406 (Not Acceptable) status code indicates that the target
@@ -510,7 +529,7 @@ According to [RFC 7231]:
 > appropriate.  A user agent MAY automatically select the most
 > appropriate choice from that list.  However, this specification does
 > not define any standard for such automatic selection>
-> 
+>
 > [...]
 >
 > A specific format for automatic selection is not defined by
@@ -611,3 +630,5 @@ This workaround presumes that the following requirements and recommendations are
 - **/req/multilinguality/accept-language-header** and **/rec/multilinguality/content-negotiation** regarding support for `Accept-Language` and `Content-Language`
 
 The parts in this specification regarding the 406 HTTP status code are inspired by discussions on Stack Overflow (\[[SO1]\], \[[SO2]\]) and on chapter 7 in \[[Alla10]\].
+
+
