@@ -82,8 +82,8 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)** - OGC API - Features - Part 1: Core<sup> 2</sup>
 - **[OpenAPI 3.0]** - OpenAPI Initiative (OAI). *OpenAPI Specification*. The latest patch version at the time of publication of this document was 3.0.3, published in February 2020.
-- **[IRs for NS]** - European Commission Regulation 1088/2010 of 23 November 2010 amending Regulation (EC) No 976/2009 as regards download services and transformation services
-- **[IRs for ISDSS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089)** - European Commission Regulation 1089/2010 implementing Directive 2007/2/EC as regards interoperability of spatial data sets and services
+- **[IRs for NS]** - Commission Regulation (EC) No 976/2009 of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
+- **[IRs for ISDSS]** - Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services
 - **[RFC 4647]** - Internet Engineering Task Force (IETF). RFC 4647, *Matching of Language Tags*. September 2006
 - **[RFC 5646]** - Internet Engineering Task Force (IETF). RFC 5646, *Tags for Identifying Languages*. September 2009
 - **[RFC 7231]** - Internet Engineering Task Force (IETF). RFC 7231, *Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content*. June 2014
@@ -92,7 +92,8 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 <sup>2 </sup> The standard is in the process of being released as [ISO 19168-1](https://www.iso.org/standard/32586.html).
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
-[IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1088 "Implementing Rules for Network Services"
+[IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02009R0976-20141231 "Implementing Rules for Network Services (consolidated version of 31/12/2014)"
+[IRs for ISDSS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02010R1089-20141231 "Implementing Rules for interoperability of spatial data sets and services (consolidated version of 31/12/2014)"
 [OpenAPI 3.0]: http://spec.openapis.org/oas/v3.0.3 "OpenAPI Specification 3.0"
 [RFC 4647]: https://www.rfc-editor.org/rfc/rfc4647 "Matching of Language Tags"
 [RFC 5646]: https://www.rfc-editor.org/rfc/rfc5646 "Tags for Identifying Languages"
@@ -330,7 +331,9 @@ This requirements class is relevant when providing access to INSPIRE data encode
 
 | **Recommendation** | **/rec/geojson/geojson-inspire** |
 | --- | --- |
-| A | For each `collection` which is encoded as GeoJSON and provides harmonised data according to the [[IRs for ISDSS]](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32010R1089), the Web API SHOULD follow the [INSPIRE UML-to-GeoJSON encoding rule.](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md) |
+| A | The GeoJSON encoding rule used for each feature collection and the features it contains SHOULD be documented in accordance with the guidelines in the [repository for alternative encodings](https://github.com/INSPIRE-MIF/2017.2) and SHOULD be based on model transformations and conversion rules documented in that repository if the feature collection provides data that are harmonised according to the \[[IRs for ISDSS]\]. |
+
+Note that in order to conform to the legal requirements of INSPIRE, any encoding rule used must be properly documented, see also [Article 7](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02010R1089-20141231&qid=1604512031742&from=EN#tocId9) in the \[[IRs for ISDSS]\].
 
 ### 8.4. Requirements class “INSPIRE-bulk-download” <a name="req-bulk-download"></a>
 
