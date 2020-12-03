@@ -80,7 +80,8 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 
 - **[ISO 19115-2:2019](https://schemas.isotc211.org/schemas/19115/-2/gmi/1.0/gmi.xsd)** - ISO 19115-2:2019, *Geographic information — Metadata — Part 2: Extensions for acquisition and processing*
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
-- **[OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)** - OGC API - Features - Part 1: Core<sup> 2</sup>
+- **[OGC API - Features - 1]** - OGC API - Features - Part 1: Core<sup> 2</sup>
+- **[OGC API - Features - 2]** - OGC API - Features - Part 2: Coordinate Reference Systems by Reference
 - **[OpenAPI 3.0]** - OpenAPI Initiative (OAI). *OpenAPI Specification*. The latest patch version at the time of publication of this document was 3.0.3, published in February 2020.
 - **[IRs for NS]** - Commission Regulation (EC) No 976/2009 of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
 - **[IRs for ISDSS]** - Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services
@@ -89,11 +90,13 @@ The target of all requirements classes are “Web APIs”. Conformance with this
 - **[RFC 7231]** - Internet Engineering Task Force (IETF). RFC 7231, *Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content*. June 2014
 - **[RSS 2.0](http://www.rssboard.org/rss-draft-1)** - Really Simple Syndication Specification (RSS 2.0) Specification
 
-<sup>2 </sup> The standard is in the process of being released as [ISO 19168-1](https://www.iso.org/standard/32586.html).
+<sup>2 </sup> The standard is also published as [ISO 19168-1:2020, Geographic information — Geospatial API for features — Part 1: Core](https://www.iso.org/standard/32586.html). Note that a [draft version 1.0.1](http://docs.opengeospatial.org/DRAFTS/17-069r4.html) is available, see the included issues on https://github.com/opengeospatial/ogcapi-features/milestone/4?closed=1.
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02009R0976-20141231 "Implementing Rules for Network Services (consolidated version of 31/12/2014)"
 [IRs for ISDSS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02010R1089-20141231 "Implementing Rules for interoperability of spatial data sets and services (consolidated version of 31/12/2014)"
+[OGC API - Features - 1]: http://docs.opengeospatial.org/is/17-069r3/17-069r3.html "OGC API - Features - Part 1: Core"
+[OGC API - Features - 2]: http://docs.opengeospatial.org/is/18-058/18-058.html "OGC API - Features - Part 2: Coordinate Reference Systems by Reference"
 [OpenAPI 3.0]: http://spec.openapis.org/oas/v3.0.3 "OpenAPI Specification 3.0"
 [RFC 4647]: https://www.rfc-editor.org/rfc/rfc4647 "Matching of Language Tags"
 [RFC 5646]: https://www.rfc-editor.org/rfc/rfc5646 "Tags for Identifying Languages"
@@ -111,8 +114,8 @@ For the purposes of this document, the following terms and definitions apply:
 | direct access download service | Download Service which provides access to the Spatial Objects in Spatial Data Sets based upon a query | [IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32010R1088&from=EN) |
 | encoding | Conversion of data into a series of codes. | [ISO 19118](https://www.iso.org/obp/ui/#iso:std:iso:19118:ed-2:v1:en:term:4.13) |
 | encoding rule | Identifiable collection of conversion rules that define the encoding for a particular data structure. | [ISO 19118](https://www.iso.org/obp/ui/#iso:std:iso:19118:ed-2:v1:en:term:4.14) |
-| feature | Abstraction of real world phenomena. **NOTE** The concept of a `feature` is synonymous to a `spatial object` in INSPIRE | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature) |
-| feature collection | A set of features from a data set. | [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection) |
+| feature | Abstraction of real world phenomena. **NOTE** The concept of a `feature` is synonymous to a `spatial object` in INSPIRE | [OGC API - Features - 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature) |
+| feature collection | A set of features from a data set. | [OGC API - Features - 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection) |
 | feature type | **NOTE** The concept of a `feature type` is synonymous to a `spatial object type` in INSPIRE | [INSPIRE](https://inspire.ec.europa.eu/glossary/SpatialObject) |
 | pre-defined data set download service | Service that enables copies of spatial data sets, or parts of such sets, to be downloaded. | [IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20101228&from=EN) |
 | Web API | API using an architectural style that is founded on the technologies of the Web. | [DWBP](https://www.w3.org/TR/dwbp) |
@@ -166,11 +169,13 @@ The principle that a Web API provides data from one data set is in line with OGC
 
 > A server that implements this conformance class provides access to the features in a dataset. In other words, the API is a distribution of that dataset. A file download, for example, would be another distribution.
 
-### 7.2. OAPIF Resources <a name="resources"></a>
+### 7.2. Resources <a name="resources"></a>
 
-The figure below illustrates the resources defined by OGC API – Features, and the links that are required by the depicted requirements classes, including the link relation types to be used.
+The figures below illustrate the resources defined by OGC API – Features, and links to external resources that are required by the depicted requirements classes, including the link relation types to be used.
 
-![Resources and relations between them](figures/resources.png)
+![Resources and relations between them for the INSPIRE core requirements class](figures/resources_core.png)
+
+![Resources and relations between them for the INSPIRE bulk download requirements class](figures/resources_bulk.png)
 
 ## 8. Requirements classes <a name="req-classes"></a>
  
@@ -202,6 +207,10 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 | **Requirement** | **/req/pre-defined/spatial-data-set-metadata** |
 | --- | --- |
 | A | The response of the `/collections` operation SHALL include a link to the metadata record for the data set. This link SHALL have `rel` link parameter `describedby` and `type` link parameter `application/xml`. |
+
+**NOTE** This is an enforcement of recommendation [http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-descriptions](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rec_core_fc-md-descriptions) in [OGC API - Features - 1] for the metadata record.
+
+The data set metadata record must be available in the relevant national geoportal (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country), must be harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu) and must be INSPIRE-compliant. However, this is out of scope for this specification. Note that often the person responsible for the metadata is not the same as the person responsible for the Web API.
 
 **TEST**
 1. Issue an HTTP GET request to {root}/collections.
@@ -249,7 +258,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 | --- | --- |
 | A | The Web API SHALL contain a link to the licence of the data set in the `links` property of the response of the request to `/collections` (relation: `license`). |
 
-**NOTE** This is an enforcement of subrecommendation B of recommendation http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-license in [OAPIF].
+**NOTE** This is an enforcement of subrecommendation B of recommendation http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-license in [OGC API - Features - 1].
 
 **OUTSTANDING ISSUE**: Can we in INSPIRE have datasets where different licences would apply for different parts of a dataset? In other words, should the requirement enforce either subrecommendation A or B to be followed, and not just B?
 
@@ -274,7 +283,7 @@ The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.op
 
 This requirements class is mandatory for all data sets that contain information in more than one natural language.
 
-The requirements from the [IRs for NS] to support requests in different natural languages are met in the Web API through HTTP language negotiation, using HTTP headers as specified in [RFC 7231], language tags as specified in [RFC 5646] and matching of language tags as specified in [RFC 4647].
+The requirements from the \[[IRs for NS]\] to support requests in different natural languages are met in the Web API through HTTP language negotiation, using HTTP headers as specified in [RFC 7231], language tags as specified in [RFC 5646] and matching of language tags as specified in [RFC 4647].
 
 | **Requirement** | **/req/multilinguality/accept-language-header** |
 | --- | --- |
@@ -328,7 +337,6 @@ An `Accept-Language` HTTP header that contains `*;q=0.0`, e.g. `en;q=1.0,*;q=0.0
 
 This requirements class is relevant when providing access to INSPIRE data encoded as (Geo-)JSON (e.g. by following the approach defined in [INSPIRE action 2017.2](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?pageId=277742184) for 'Addresses' and 'Environmental Monitoring Facilities').
 
-
 | **Recommendation** | **/rec/geojson/geojson-inspire** |
 | --- | --- |
 | A | The GeoJSON encoding rule used for each feature collection and the features it contains SHOULD be documented in accordance with the guidelines in the [repository for alternative encodings](https://github.com/INSPIRE-MIF/2017.2) and SHOULD be based on model transformations and conversion rules documented in that repository if the feature collection provides data that are harmonised according to the \[[IRs for ISDSS]\]. |
@@ -380,7 +388,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 ## 9. Example <a name="example"></a>
 
-**EXAMPLE** Feature collections response document (adapted from [OAPIF](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
+**EXAMPLE** Feature collections response document (adapted from [OGC API - Features - 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
 - This feature collections example response in JSON is for a data set with a single collection "building". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
 
@@ -456,11 +464,12 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 - \[DWBP\] W3C. *Data on the Web Best Practices*. W3C Recommendation. 31 January 2017. Available from: <https://www.w3.org/TR/dwbp/>
 - \[GCloud-REST\] *REST Guidelines of Belgian government institutions*. Available from: <https://www.gcloud.belgium.be/rest/>
 - [INSPIRE UML-to-GeoJSON encoding rule](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md)
-- \[OD\] *Open Definition*. Version 2.1. Open Knowledge Foundation, November 2015. Available from: <https://opendefinition.org/od/2.1>
 - \[MDN\] MDN. *406 Not Acceptable - HTTP \| MDN*.  Available from: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406>
+- \[OD\] *Open Definition*. Version 2.1. Open Knowledge Foundation, November 2015. Available from: <https://opendefinition.org/od/2.1>
 - \[SDWBP\] W3C. *Spatial Data on the Web Best Practices*. W3C Working Group Note & OGC Best Practice. 28 September 2017. Available from: <https://www.w3.org/TR/sdw-bp/>
 - \[SO1\] How to properly send 406 status code? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
 - \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
+- \[TG Download\] INITIAL OPERATING CAPABILITY TASK FORCE FOR NETWORK SERVICES. *Technical Guidance for the implementation of INSPIRE Download Services*. Version 3.1. Initial Operating Capability Task Force, 9 August 2013. Available from: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [Alla10]: https://www.oreilly.com/library/view/restful-web-services/9780596809140/ "RESTful Web services cookbook"
@@ -469,6 +478,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 [SO1]: https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code "How to properly send 406 status code? (Stack Overflow)"
 [SO2]: https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload "Format for 406 Not Acceptable payload? (Stack Overflow)"
 [RFC 7807]: https://www.rfc-editor.org/info/rfc7807 "Problem Details for HTTP APIs"
+[TG Download]: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services "Technical Guidance for the implementation of INSPIRE Download Services"
 
 # Annex A: Abstract Test Suite <a name="ats"></a>
 
@@ -476,7 +486,90 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 # Annex B: Mapping the requirements from the IRs to the OGC-API Features standard (and extensions) <a name="ir2oapif"></a>
 
-**NOTE** A [draft mapping](https://webgate.ec.europa.eu/fpfis/wikis/download/attachments/332217789/%5BDOC-6%5D%20IRs-WFS3.0%20mapping%20discussion%20paper%20v1.2.pdf?api=v2) between the requirements from the IRs to the OGC-API Features standard has been proposed and discussed in the INSPIRE MIG-T. This section will be completed based on this discussion paper once this specification is stable.
+The next sections document how the requirements and recommendations in this specification implement the operations for a download service defined in \[[IRs for NS]\]. This mapping should be read alongside with \[[IRs for NS]\], links to the relevant sections are included in the mapping tables.
+
+Requirements and recommendations from \[[OGC API - Features - 1]\] are identified by a URI starting with `http://www.opengis.net/spec/ogcapi-features-1/1.0`, requirements and recommendations from \[[OGC API - Features - 2]\] are identified by a URI starting with `http://www.opengis.net/spec/ogcapi-features-2/1.0`.
+
+Note that certain operations can only be implemented by a series of requests to a conformant Web API - as opposed to one request returning all response parameters at once, which is the case in the WFS and Atom implementations, as described in \[[TG Download]\].
+
+## Download Operations
+
+The (pre-defined data set) download service operations are listed in [table 1 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId67) in \[[IRs for NS]\] and in the sections below.
+
+### Get Download Service Metadata operation
+
+The Get Download Service Metadata operation is defined in [section 2 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId68) of the \[[IRs for NS]\].
+
+| \[[IRs for NS]\] | Implementation |
+| ------------ | ------------ |
+| Request | 5 steps: <br /> 1. HTTP GET request at path `/` of the Web API, see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/root-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_root-op) <br /> 2. HTTP GET request to the link with relation type `service-desc` included in the landing page, the OpenAPI document, see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/oas30/oas-definition-1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_oas30_oas-definition-1) <br /> 3. HTTP GET request at path `/collections`, see [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-op)<br /> 4. HTTP GET request to all links with `rel` link parameter `describedby` and `type` link parameter `application/xml`, see requirement /req/pre-defined/spatial-data-set-metadata <br /> 5. HTTP GET request at paths `/collections/{collectionId}`, parameter `{collectionId}` being each `id` property in the feature collections resource retrieved step 3 (JSONPath: `$.collections[*].id`), see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/sfc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_sfc-md-op) |
+| Language request parameter | Provided in the `Accept-Language` HTTP header of the request in step 1, see requirement /req/multilinguality/accept-language-header, or no need to provide if the data set contains information in only one natural language |
+| Download Service Metadata response parameter | Provided in the `info` field of the OpenAPI document retrieved in step 2, see also [section 4.7.2](http://spec.openapis.org/oas/v3.0.3#info-object) in \[[OpenAPI 3.0]\] and [Annex C](#inspire-ns-openapi). |
+| Operations Metadata response parameter | Provided in the `paths` field of the OpenAPI document retrieved in step 2, see also [section 4.7.8](http://spec.openapis.org/oas/v3.0.3#paths-object) in \[[OpenAPI 3.0]\]. |
+| Languages response parameter - Response Language | Provided in `Content-Language` HTTP header of the response in step 1, see requirement /req/multilinguality/content-language-root in the conditional [requirements class INSPIRE-multilinguality](#req-multilinguality). |
+| Languages response parameter - Supported Languages | No appriopriate mapping, see [Annex D](#supported-lang). |
+| Spatial Data Sets Metadata response parameter - INSPIRE metadata elements | The one of the resources retrieved in step 4 that has a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata. |
+| Spatial Data Sets Metadata response parameter - Coordinate Reference Systems | Provided for each feature collection in property `crs` of the feature collection returned in step 5, or `http://www.opengis.net/def/crs/OGC/1.3/CRS84` if property `crs` is not present. See requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-success](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-success) (in particular the OpenAPI 3.0 schema [collections.yaml](http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml) and [collection.yaml](http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collection.yaml)), requirement [/req/core/sfc-md-success](http://docs.opengeospatial.org/DRAFTS/17-069r4.html#req_core_sfc-md-success) and requirement [http://www.opengis.net/spec/ogcapi-features-2/1.0/req/crs/fc-md-crs-list](http://docs.opengeospatial.org/is/18-058/18-058.html#req_crs_fc-md-crs-list).|
+
+### Get Spatial Data Set operation
+
+The Get Spatial Data Set operation is defined in [section 3 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId76) of the \[[IRs for NS]\].
+
+| \[[IRs for NS]\] | Implementation |
+| ------------ | ------------ |
+| Request | Two options (the second option has two variants):<br /> a. When [requirements class INSPIRE-bulk-download](#req-bulk-download) is not implemented:<br /> 1. HTTP GET request at path `/collections`, see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-op)<br />2. HTTP GET requests at paths  `/collections/{collectionId}`, parameter `{collectionId}` being each `id` property in the feature collections resource retrieved step 3 (JSONPath: `$.collections[*].id`), see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/sfc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_sfc-md-op)<br />3. HTTP GET requests at paths `/collections/{collectionId}/items`, see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-op)<br />4. HTTP GET requests at URI's specified in the `next` links, if present, see recommendation [http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-next-1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rec_core_fc-next-1)<br />b. When [requirements class INSPIRE-bulk-download](#req-bulk-download) is implemented:<br />1. HTTP GET request at path `/collections`, see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-op)<br />2. HTTP GET request at `enclosure` link of the feature collections resource if present, see requirements /req/pre-defined/enclosure and [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-success](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-success)<br />3. When an `enclosure` link is not present: HTTP GET requests at paths  `/collections/{collectionId}`, parameter `{collectionId}` being each `id` property in the feature collections resource retrieved step 3 (JSONPath: `$.collections[*].id`), see requirement [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/sfc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_sfc-md-op)<br />4. HTTP GET requests at URI's specified in `enclosure` links of each feature collection, see /req/pre-defined/enclosure and [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-success](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-success) |
+| Language request parameter | Provided in the `Accept-Language` HTTP header of the requests in steps a.1, a.2 and a.3 or in steps b.1 and b.3, see requirement /req/multilinguality/accept-language-header, or no need to provide if the data set contains information in only one natural language |
+| Spatial Data Set Identifier request parameter | Each landing page provides access to one data set, therefore, the Spatial Data Set Identifier does not need to be provided |
+| Get Spatial Data Set response parameter - Spatial Data Set | The response retrieved in step a.2, the reponse retrieved in b.2 or the responses retrieved in b.4  |
+
+### Describe Spatial Data Set operation
+
+The Describe Spatial Data Set operation is defined in [section 4 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId83) of the \[[IRs for NS]\].
+
+| \[[IRs for NS]\] | Implementation |
+| ------------ | ------------ |
+| Request | Two steps: <br /> 1. HTTP GET request at path `/collections`, see [http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core/fc-md-op](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#req_core_fc-md-op)<br /> 2. HTTP GET request to all links with `rel` link parameter `describedby` and `type` link parameter `application/xml`, see requirement /req/pre-defined/spatial-data-set-metadata |
+| Language request parameter | Provided in the `Accept-Language` HTTP header of the request in step 1, see requirement /req/multilinguality/accept-language-header, or no need to provide if the data set contains information in only one natural language |
+| Spatial Data Set Identifier request parameter | Each landing page provides access to one data set, therefore, the Spatial Data Set Identifier does not need to be provided |
+|Describe Spatial Data Set response parameter - Spatial Objects description | The one of the resources retrieved in step 2 that has a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata. |
+
+### Link Dowload Service operation
+
+The Link Download Service operation is defined in [section 5 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId89) of the \[[IRs for NS]\].
+
+This operation is implemented by publishing the data set metadata record in the relevant national geoportal (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country) and making sure that it is harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu).
+
+## Direct Access Download Operations
+
+An overview of direct access download service operations is given in [table 2 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId93) in \[[IRs for NS]\].
+
+### Get Spatial Object
+
+The Get Spatial Object operation is defined in [section 7 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId95) of the \[[IRs for NS]\].
+
+| \[[IRs for NS]\] | Implementation |
+| ------------ | ------------ |
+| Request | 1. HTTP GET request at path `/collections/{collectionId}/items` and with the relevant parameters as described below. <br /> 2. HTTP GET request to all links with `rel` link parameter `describedby` and `type` link parameter `application/xml` |
+| Language request parameter | Provided in the `Accept-Language` HTTP header of the request, see requirement /req/multilinguality/accept-language-header, or no need to provide if the data set contains information in only one natural language |
+| Spatial Data Set Identifier request parameter | Each landing page provides access to one data set. Therefore, the Spatial Data Set Identifier does not need to be provided |
+| Coordinate Reference System request parameter | Provided in query parameter `crs`, see requirement [http://www.opengis.net/spec/ogcapi-features-2/1.0/req/crs/fc-crs-definition](http://docs.opengeospatial.org/is/18-058/18-058.html#req_crs_fc-crs-definition) |
+| Query request parameter - Unique Resource Identifier of Spatial Data Set | Each landing page provides access to one data set, therefore, the Spatial Data Set Identifier does not need to be provided |
+| Query request parameter - all relevant key attributes and the relationship between Spatial Objects as set out in \[[IRs for ISDSS]\]; in particular the Unique Identifier of Spatial Object and the temporal dimension characteristics, including the date of update | (**OUTSTANDING ISSUE** to be added when [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.opengeospatial.org/DRAFTS/19-079.html) is published). |
+| Query request parameter - bounding box, expressed in any of the Coordinate Reference Systems listed in Regulation (EU) No 1089/2010 | Provided in query parameter `bbox-crs`, see requirement [http://www.opengis.net/spec/ogcapi-features-2/1.0/req/crs/fc-bbox-crs-definition](http://docs.opengeospatial.org/is/18-058/18-058.html#req_crs_fc-bbox-crs-definition) |
+| Query request parameter - Spatial Data Theme | Each landing page provides access to one data set, therefore, the Spatial Data Theme does not need to be provided |
+| Get Spatial Object response parameter - Spatial Objects Set | The features returned in the response in step 1 |
+| Get Spatial Object response parameter - Spatial Objects Set Metadata | The one of the resources retrieved in step 2 that has a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata (**OUTSTANDING ISSUE** no requirement on such link present yet) |
+
+### Describe Spatial Object Type
+
+The Describe Spatial Object Type operation is defined in [section 8 of Annex IV](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN#tocId104) of the \[[IRs for NS]\].
+
+| \[[IRs for NS]\] | Implementation |
+| ------------ | ------------ |
+| Request | 1. HTTP GET requests at paths  `/collections/{collectionId}`<br />2. Identify those feature collections that have a link with link relation type `tag` that points to the entry in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) of the spatial object type that is to be described <br /> 3. HTTP GET request to all links in the collections identified in the previous step that have `rel` link parameter `describedby` and `type` link parameter `application/xml` |
+| Language request parameter | Provided in the `Accept-Language` HTTP header of the request in step 1, see requirement /req/multilinguality/accept-language-header, or no need to provide if the data set contains information in only one natural language |
+| Spatial Object Type request parameter | URI of the feature concept in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) |
+| Describe Spatial Object Type response parameter - Spatial Object Type description | Those of the resources retrieved in step 2 that do not have a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata and recommendation [http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-descriptions](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rec_core_fc-md-descriptions) (**OUTSTANDING ISSUE** no requirement on such link present yet, depends also on the encoding and thus relevant requirements class) |
 
 # Annex C: Mapping between INSPIRE NS Metadata elements and OpenAPI definition fields  <a name="inspire-ns-openapi"></a>
 
@@ -497,7 +590,7 @@ Spatial Resolution (C) | |
 Conformity* (M) | |
 Conditions for Access and Use (M) | info/termsOfService or info/license |
 Limitations on Public Access (M) | info/termsOfService or info/license |
-Responsible Organisation (M) info/contact/name |
+Responsible Organisation (M) | info/contact/name |
 Metadata Point of Contact (M) | info/contact/name |
 Metadata Date (M)  | |
 Metadata Language (M)  | |
