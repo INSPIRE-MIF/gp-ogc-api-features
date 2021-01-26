@@ -362,7 +362,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 2. Validate that the Collections response and/or each of the Collection responses have a link with the `rel` link parameter `enclosure`.
 3. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
 4. For each of the responses:
-    - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inclusive.
+    - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inconclusive.
     - If HTTP status code 200 is returned and HTTP header` Content-Length` > 0, the test verdict is “pass”.
     - Otherwise, the test verdict is “fail”.
 
