@@ -1,7 +1,7 @@
 # Setting up an INSPIRE Download service based on the OGC API-Features standard
 
-`Version: 0.3`
-`Date: 2020-09-11`
+`Version: 1.0`
+`Date: 2021-02-05`
 
 ## Table of Contents
 
@@ -19,6 +19,7 @@
     * [8.2. Requirements class “INSPIRE-multilinguality”](#req-multilinguality)
     * [8.3. Requirements class “INSPIRE-OAPIF-GeoJSON”](#req-oapif-json)
     * [8.4. Requirements class "INSPIRE-bulk-download"](#req-bulk-download)
+    * [8.5. Requirements class "INSPIRE-CRS"](#req-crs)    
 * [9. Example](#example)
 * [10. Bibliography](#bibliography)
 * [Annex A: Abstract Test Suite](#ats)
@@ -70,9 +71,8 @@ The requirements classes and their dependencies are illustrated in the figure be
 ![Overview of dependencies](figures/dependencies.png)
 
 Future versions of this specification may include further conformance classes, in particular for
-- direct access download,
-- quality of service, and
-- support for additional CRS.
+- direct access download, and
+- quality of service
 
 The target of all requirements classes are “Web APIs”. Conformance with this specification shall be assessed using all the relevant conformance test cases specified in [Annex A (normative)](#ats) of this specification.
 
@@ -260,7 +260,7 @@ The data set metadata record must be available in the relevant national geoporta
 
 **NOTE** This is an enforcement of subrecommendation B of recommendation http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-license in [OGC API - Features - 1].
 
-**OUTSTANDING ISSUE**: Can we in INSPIRE have datasets where different licences would apply for different parts of a dataset? In other words, should the requirement enforce either subrecommendation A or B to be followed, and not just B?
+
 
 **TEST**
 1. Issue an HTTP GET request to `{root}/collections`.
@@ -272,7 +272,7 @@ The data set metadata record must be available in the relevant national geoporta
 | --- | --- |
 | A | The licence information for the exposed data set SHOULD be provided in accordance with [OpenAPI 3.0]. |
 
-**OUTSTANDING ISSUE**: A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi)
+**NOTE**: A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi)
 
 ### 8.2. Requirements class INSPIRE-multilinguality <a name="req-multilinguality"></a>
 
@@ -386,6 +386,45 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | --- | --- |
 | A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter. |
 
+### 8.5. Requirements class “INSPIRE-CRS” <a name="req-crs"></a>
+| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/inspire-crs |
+| --- | --- |
+| Target type | Web API |
+| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
+| Dependency | [OAPIF requirements class “Coordinate Reference Systems by Reference](https://docs.opengeospatial.org/is/18-058/18-058.html#_requirements_class_coordinate_reference_systems_by_reference)  |
+
+| **Recommendation** | **/rec/inspire-crs/recognised-crs** |
+| --- | --- |
+| A | For each feature collection in the API at least one of the coordinate reference systems (CRS) listed below SHOULD be included in the list of supported coordinate reference systems.
+ |
+
+**List of supported CRS**
+- http://www.opengis.net/def/crs/EPSG/0/4936
+- http://www.opengis.net/def/crs/EPSG/0/4937
+- http://www.opengis.net/def/crs/EPSG/0/4258
+- http://www.opengis.net/def/crs/EPSG/0/3035
+- http://www.opengis.net/def/crs/EPSG/0/3034
+- http://www.opengis.net/def/crs/EPSG/0/3038
+- http://www.opengis.net/def/crs/EPSG/0/3039
+- http://www.opengis.net/def/crs/EPSG/0/3040
+- http://www.opengis.net/def/crs/EPSG/0/3041
+- http://www.opengis.net/def/crs/EPSG/0/3042
+- http://www.opengis.net/def/crs/EPSG/0/3043
+- http://www.opengis.net/def/crs/EPSG/0/3044
+- http://www.opengis.net/def/crs/EPSG/0/3045
+- http://www.opengis.net/def/crs/EPSG/0/3046
+- http://www.opengis.net/def/crs/EPSG/0/3047
+- http://www.opengis.net/def/crs/EPSG/0/3048
+- http://www.opengis.net/def/crs/EPSG/0/3049
+- http://www.opengis.net/def/crs/EPSG/0/3050
+- http://www.opengis.net/def/crs/EPSG/0/3051
+- http://www.opengis.net/def/crs/EPSG/0/5730
+- http://www.opengis.net/def/crs/EPSG/0/7409
+
+
+**NOTE** The MIG supported a proposed solution to set up a Coordinate Reference System (CRS) registry and control body to manage the proposal of additional CRS under the governance of the MIG. Once this registry has been established, this requirements class will be updated.
+
+
 ## 9. Example <a name="example"></a>
 
 **EXAMPLE** Feature collections response document (adapted from [OGC API - Features - 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
@@ -398,62 +437,105 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 - There are also links to the license information for the data set (using link relation type `license`).
 
-- Finally, the link with the link relation type `enclosure` provides a reference to another distribution of the data set as a GeoPackage download of the complete data set (pre-defined download). The `length` property includes the size in bytes of the data set.
+- The link with the link relation type `enclosure` provides a reference to another distribution of the data set as a GeoPackage download of the complete data set (pre-defined download). The `length` property includes the size in bytes of the data set.
+
+- Finally, the server  advertises the list of supported CRS identifiers.
 
 ```json
 {
-  "links": [
-  { "href": "https://developer.my-org.eu/apis/buildings/collections.json",
-    "rel": "self",
-    "type": "application/json",
-    "title": "this document" },
-  { "href": "https://developer.my-org.eu/apis/buildings/collections.html",
-    "rel": "alternate",
-    "type": "text/html",
-    "title": "this document as HTML" },
-  { "href": "http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
-    "rel": "describedby",
-    "type": "application/xml",
-    "title": "The 2D application schema for INSPIRE theme buildings." },
-  { "href": "https://download.my-org.eu/buildings.gpkg",
-    "rel": "enclosure",
-    "type": "application/geopackage+sqlite3",
-    "title": "Download the dataset as a GeoPackage (CRS: EPSG:25832)",
-    "length": 472546 },
-  { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "rel": "license",
-    "type": "text/html",
-    "title": "CC0-1.0" },
-  { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
-    "rel": "license",
-    "type": "application/rdf+xml",
-    "title": "CC0-1.0" }
-  ],
-  "collections": [
-  {
-    "id": "building",
-    "title": "Buildings",
-    "description": "Buildings in the city of Bonn.",
-    "extent": {
-      "spatial": {
-        "bbox": [ [ 7.01, 50.63, 7.22, 50.78 ] ]
-      },
-      "temporal": {
-        "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
-      }
-    },
-    "links": [
-      { "href": "https://developer.my-org.eu/apis/buildings/collections/building/items",
-        "rel": "items",
-        "type": "application/geo+json",
-        "title": "Buildings" },
-      { "href": "https://inspire.ec.europa.eu/featureconcept/Building",
-        "rel": "tag",
-        "type": "application/json",
-        "title": "Feature concept Building" }
+    "links":[
+        {
+            "href":"https://developer.my-org.eu/apis/buildings/collections.json",
+            "rel":"self",
+            "type":"application/json",
+            "title":"this document"
+        },
+        {
+            "href":"https://developer.my-org.eu/apis/buildings/collections.html",
+            "rel":"alternate",
+            "type":"text/html",
+            "title":"this document as HTML"
+        },
+        {
+            "href":"http://inspire.ec.europa.eu/schemas/bu-core2d/4.0/BuildingsCore2D.xsd",
+            "rel":"describedby",
+            "type":"application/xml",
+            "title":"The 2D application schema for INSPIRE theme buildings."
+        },
+        {
+            "href":"https://download.my-org.eu/buildings.gpkg",
+            "rel":"enclosure",
+            "type":"application/geopackage+sqlite3",
+            "title":"Download the dataset as a GeoPackage (CRS: EPSG:25832)",
+            "length":472546
+        },
+        {
+            "href":"https://creativecommons.org/publicdomain/zero/1.0/",
+            "rel":"license",
+            "type":"text/html",
+            "title":"CC0-1.0"
+        },
+        {
+            "href":"https://creativecommons.org/publicdomain/zero/1.0/rdf",
+            "rel":"license",
+            "type":"application/rdf+xml",
+            "title":"CC0-1.0"
+        }
+    ],
+    "collections":[
+        {
+            "id":"building",
+            "title":"Buildings",
+            "description":"Buildings in the city of Bonn",
+            "extent":{
+                "spatial":{
+                    "bbox":[
+                        [
+                            7.01,
+                            50.63,
+                            7.22,
+                            50.78
+                        ]
+                    ],
+                    "crs":"http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+                },
+                "crs":[
+                    "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+                    "http://www.opengis.net/def/crs/EPSG/0/25832",
+                    "http://www.opengis.net/def/crs/EPSG/0/25833",
+                    "http://www.opengis.net/def/crs/EPSG/0/4258",
+                    "http://www.opengis.net/def/crs/EPSG/0/4326",
+                    "http://www.opengis.net/def/crs/EPSG/0/3395",
+                    "http://www.opengis.net/def/crs/EPSG/0/3857",
+                    "http://www.opengis.net/def/crs/EPSG/0/3034",
+                    "http://www.opengis.net/def/crs/EPSG/0/3035"
+                ],
+                "storageCrs":"http://www.opengis.net/def/crs/EPSG/0/25832",
+                "temporal":{
+                    "interval":[
+                        [
+                            "2010-02-15T12:34:56Z",
+                            null
+                        ]
+                    ]
+                }
+            },
+            "links":[
+                {
+                    "href":"https://developer.my-org.eu/apis/buildings/collections/building/items",
+                    "rel":"items",
+                    "type":"application/geo+json",
+                    "title":"Buildings"
+                },
+                {
+                    "href":"https://inspire.ec.europa.eu/featureconcept/Building",
+                    "rel":"tag",
+                    "type":"application/json",
+                    "title":"Feature concept Building"
+                }
+            ]
+        }
     ]
-  }
-  ]
 }
 ```
 
@@ -554,11 +636,11 @@ The Get Spatial Object operation is defined in [section 7 of Annex IV](https://e
 | Spatial Data Set Identifier request parameter | Each landing page provides access to one data set. Therefore, the Spatial Data Set Identifier does not need to be provided |
 | Coordinate Reference System request parameter | Provided in query parameter `crs`, see requirement [http://www.opengis.net/spec/ogcapi-features-2/1.0/req/crs/fc-crs-definition](http://docs.opengeospatial.org/is/18-058/18-058.html#req_crs_fc-crs-definition) |
 | Query request parameter - Unique Resource Identifier of Spatial Data Set | Each landing page provides access to one data set, therefore, the Spatial Data Set Identifier does not need to be provided |
-| Query request parameter - all relevant key attributes and the relationship between Spatial Objects as set out in \[[IRs for ISDSS]\]; in particular the Unique Identifier of Spatial Object and the temporal dimension characteristics, including the date of update | (**OUTSTANDING ISSUE** to be added when [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.opengeospatial.org/DRAFTS/19-079.html) is published). |
+| Query request parameter - all relevant key attributes and the relationship between Spatial Objects as set out in \[[IRs for ISDSS]\]; in particular the Unique Identifier of Spatial Object and the temporal dimension characteristics, including the date of update | (**NOTE** to be added when [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.opengeospatial.org/DRAFTS/19-079.html) is published). |
 | Query request parameter - bounding box, expressed in any of the Coordinate Reference Systems listed in Regulation (EU) No 1089/2010 | Provided in query parameter `bbox-crs`, see requirement [http://www.opengis.net/spec/ogcapi-features-2/1.0/req/crs/fc-bbox-crs-definition](http://docs.opengeospatial.org/is/18-058/18-058.html#req_crs_fc-bbox-crs-definition) |
 | Query request parameter - Spatial Data Theme | Each landing page provides access to one data set, therefore, the Spatial Data Theme does not need to be provided |
 | Get Spatial Object response parameter - Spatial Objects Set | The features returned in the response in step 1 |
-| Get Spatial Object response parameter - Spatial Objects Set Metadata | The one of the resources retrieved in step 2 that has a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata (**OUTSTANDING ISSUE** no requirement on such link present yet) |
+| Get Spatial Object response parameter - Spatial Objects Set Metadata | The one of the resources retrieved in step 2 that has a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata (**NOTE** no requirement on such link present yet) |
 
 ### Describe Spatial Object Type
 
@@ -569,7 +651,7 @@ The Describe Spatial Object Type operation is defined in [section 8 of Annex IV]
 | Request | 1. HTTP GET requests at paths  `/collections/{collectionId}`<br />2. Identify those feature collections that have a link with link relation type `tag` that points to the entry in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) of the spatial object type that is to be described <br /> 3. HTTP GET request to all links in the collections identified in the previous step that have `rel` link parameter `describedby` and `type` link parameter `application/xml` |
 | Language request parameter | Provided in the `Accept-Language` HTTP header of the request in step 1, see requirement /req/multilinguality/accept-language-header, or no need to provide if the data set contains information in only one natural language |
 | Spatial Object Type request parameter | URI of the feature concept in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) |
-| Describe Spatial Object Type response parameter - Spatial Object Type description | Those of the resources retrieved in step 2 that do not have a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata and recommendation [http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-descriptions](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rec_core_fc-md-descriptions) (**OUTSTANDING ISSUE** no requirement on such link present yet, depends also on the encoding and thus relevant requirements class) |
+| Describe Spatial Object Type response parameter - Spatial Object Type description | Those of the resources retrieved in step 2 that do not have a XML root element that indicates that it is a ISO 19115 metadata record, see requirement /req/pre-defined/spatial-data-set-metadata and recommendation [http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-descriptions](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rec_core_fc-md-descriptions) (**NOTE** no requirement on such link present yet, depends also on the encoding and thus relevant requirements class) |
 
 # Annex C: Mapping between INSPIRE NS Metadata elements and OpenAPI definition fields  <a name="inspire-ns-openapi"></a>
 
