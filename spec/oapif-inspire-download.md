@@ -391,7 +391,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | --- | --- |
 | Target type | Web API |
 | Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
-| Dependency | [OAPIF requirements class “Coordinate Reference Systems by Reference](https://docs.opengeospatial.org/is/18-058/18-058.html#_requirements_class_coordinate_reference_systems_by_reference)  |
+| Dependency | [OAPIF requirements class Coordinate Reference Systems by Reference](https://docs.opengeospatial.org/is/18-058/18-058.html#_requirements_class_coordinate_reference_systems_by_reference)  |
 
 | **Recommendation** | **/rec/inspire-crs/recognised-crs** |
 | --- | --- |
