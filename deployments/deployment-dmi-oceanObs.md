@@ -14,7 +14,7 @@ The API serves the following features:
 •	Sea level observations
 •	Water temperature observations
 
-The API belongs to the INSPIRE theme “Oceanographic geographical features”:
+The data belong to the INSPIRE theme “Oceanographic geographical features”:
 https://inspire.ec.europa.eu/Themes/143/2892
 
 ## 3. Envisaged use
@@ -23,9 +23,15 @@ The API is in production
 
 ## 4. Requirements classes
 
+OGC conformance classes:
+
 - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
 - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
 - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
+
+Requirements classes implemented from the Good Practice:
+
+- http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/pre-defined
 
 ## 5. Server-side technology
 
@@ -45,7 +51,8 @@ The technical documentation includes, amongst other things, API endpoints, reque
 
 ## 7. Issues
 
-- https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/48
-- https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/47
-- https://github.com/opengeospatial/ets-ogcapi-features10/issues/117
+- ~~https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/48~~ (bulk download is not implemented)
+- ~~https://github.com/INSPIRE-MIF/gp-ogc-api-features/issues/47~~ (bulk download is not implemented
+- ~~https://github.com/opengeospatial/ets-ogcapi-features10/issues/117~~ (issue is closed)
+- https://github.com/opengeospatial/ets-ogcapi-features10/issues/137
 
