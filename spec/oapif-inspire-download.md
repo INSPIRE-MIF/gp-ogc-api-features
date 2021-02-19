@@ -151,15 +151,15 @@ This section describes the requirements a Web API shall fulfill in order to be c
 
 For example, two data sets (with their own metadata records), one on buildings and one on addresses will have two landing pages (https://developer.my-org.eu/apis/addresses/ and https://developer.my-org.eu/apis/buildings/) rather than one landing page for the Web API (https://developer.my-org.eu/apis/oapif/) and two feature collections, one for each data set (https://developer.my-org.eu/apis/oapif/collections/addresses and https://developer.my-org.eu/apis/oapif/collections/buildings).
 
-The mapping between INSPIRE resources and OAPIF resources is given below, for an example data set containing addresses.
+The mapping between INSPIRE resources and [OAPIF resources](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#table_1) is given below, for an example data set containing addresses <sup> [5](#footnote5)</sup>.
 
 | INSPIRE resource | OAPIF resource | Sample path | Document reference |
 | ------------- | ------------- | ------------- |-------------: |
-| (Distribution<sup> 4</sup> of a) data set | Landing page | https://developer.my-org.eu/apis/addresses/ | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
-| Data set metadata | Feature collections | https://developer.my-org.eu/apis/addresses/collections/ | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) |
-| -- | Feature collection | https://developer.my-org.eu/apis/addresses/collections/address | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
-| Spatial objects | Features | https://developer.my-org.eu/apis/addresses/collections/address/items | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
-| Spatial object | Feature | https://developer.my-org.eu/apis/addresses/collections/address/items/{featureId} | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
+| (Distribution<sup> 4</sup> of a) data set | Landing page | `https://developer.my-org.eu/apis/addresses/` | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
+| Data set metadata | Feature collections | `https://developer.my-org.eu/apis/addresses/collections/` | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) |
+| -- | Feature collection | `https://developer.my-org.eu/apis/addresses/collections/address` | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
+| Spatial objects | Features | `https://developer.my-org.eu/apis/addresses/collections/address/items` | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
+| Spatial object | Feature | `https://developer.my-org.eu/apis/addresses/collections/address/items/{featureId}` | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
 
 <sup id="footnote3">3 </sup>The principle that a Web API provides data from one data set is in line with OGC API - Features - Part 1: Core, as illustrated by the quotes below. As long as no other parts for OGC API - Features are defined that support multiple datasets, INSPIRE adheres to this principle.
 
@@ -168,6 +168,8 @@ The mapping between INSPIRE resources and OAPIF resources is given below, for an
 > A server that implements this conformance class provides access to the features in a dataset. In other words, the API is a distribution of that dataset. A file download, for example, would be another distribution.
 
 <sup>4 </sup>The notion of a distribution is not present in the INSPIRE legislation, the legislation does not make the distinction between a data set and its distribution(s). However, this distinction is relevant, see also section 4 in \[DWBP\].
+
+<sup id="footnote5">5 </sup> See the [overview page of OGC API - Features implementations](https://github.com/opengeospatial/ogcapi-features/blob/master/implementations.md) and the [overview page of the Good Practice implementations](../deployments) for existing implementations.
 
 ### 7.2. Resources <a name="resources"></a>
 
