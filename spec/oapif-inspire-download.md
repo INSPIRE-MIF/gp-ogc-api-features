@@ -283,7 +283,10 @@ The data set metadata record must be available in the relevant national geoporta
 | Target type | Web API |
 | Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined) |
 
-This requirements class is mandatory for all data sets that contain information in more than one natural language.
+This requirements class is mandatory for all data sets that contain information in more than one natural language. For a data set containing textual information, the language used in the data set is given in the [Resource Language metadata element](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02008R1205-20081224&from=EN#tocId19).
+
+**PRECONDITION TESTS**
+1. For the document retrieved in the test for /req/pre-defined/spatial-data-set-metadata, check whether more than one Resource Language is provided. See also https://github.com/inspire-eu-validation/metadata/blob/2.0/datasets-and-series/resource-language.md
 
 The requirements from the \[[IRs for NS]\] to support requests in different natural languages are met in the Web API through HTTP language negotiation, using HTTP headers as specified in [RFC 7231], language tags as specified in [RFC 5646] and matching of language tags as specified in [RFC 4647].
 
