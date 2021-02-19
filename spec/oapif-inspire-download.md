@@ -392,6 +392,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter. |
 
 ### 8.5. Requirements class “INSPIRE-CRS” <a name="req-crs"></a>
+
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/inspire-crs |
 | --- | --- |
 | Target type | Web API |
@@ -400,8 +401,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 | **Recommendation** | **/rec/inspire-crs/recognised-crs** |
 | --- | --- |
-| A | For each feature collection in the API at least one of the coordinate reference systems (CRS) listed below SHOULD be included in the list of supported coordinate reference systems.
- |
+| A | For each feature collection in the API at least one of the coordinate reference systems (CRS) listed below SHOULD be included in the list of supported coordinate reference systems. |
 
 **List of supported CRS**
 - http://www.opengis.net/def/crs/EPSG/0/4936
