@@ -63,7 +63,7 @@ This specification defines the following requirements classes:
 - [INSPIRE-multilinguality (conditional)<sup> 1</sup>](#req-multilinguality)
 - [INSPIRE-OAPIF-GeoJSON (optional)](#req-oapif-json)
 - [INSPIRE-bulk-download (optional)](#req-bulk-download)
-
+- [INSPIRE-CRS (optional)](#req-crs)
 <sup>1 </sup>The INSPIRE-multilinguality requirements class is mandatory for all data sets that contain information in more than one natural language.
 
 The requirements classes and their dependencies are illustrated in the figure below.
