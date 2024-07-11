@@ -402,33 +402,7 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 | **Recommendation** | **/rec/inspire-crs/recognised-crs** |
 | --- | --- |
-| A | For each feature collection in the API at least one of the coordinate reference systems (CRS) listed below SHOULD be included in the list of supported coordinate reference systems. |
-
-**List of supported CRS**
-- http://www.opengis.net/def/crs/EPSG/0/4936
-- http://www.opengis.net/def/crs/EPSG/0/4937
-- http://www.opengis.net/def/crs/EPSG/0/4258
-- http://www.opengis.net/def/crs/EPSG/0/3035
-- http://www.opengis.net/def/crs/EPSG/0/3034
-- http://www.opengis.net/def/crs/EPSG/0/3038
-- http://www.opengis.net/def/crs/EPSG/0/3039
-- http://www.opengis.net/def/crs/EPSG/0/3040
-- http://www.opengis.net/def/crs/EPSG/0/3041
-- http://www.opengis.net/def/crs/EPSG/0/3042
-- http://www.opengis.net/def/crs/EPSG/0/3043
-- http://www.opengis.net/def/crs/EPSG/0/3044
-- http://www.opengis.net/def/crs/EPSG/0/3045
-- http://www.opengis.net/def/crs/EPSG/0/3046
-- http://www.opengis.net/def/crs/EPSG/0/3047
-- http://www.opengis.net/def/crs/EPSG/0/3048
-- http://www.opengis.net/def/crs/EPSG/0/3049
-- http://www.opengis.net/def/crs/EPSG/0/3050
-- http://www.opengis.net/def/crs/EPSG/0/3051
-- http://www.opengis.net/def/crs/EPSG/0/5730
-- http://www.opengis.net/def/crs/EPSG/0/7409
-
-
-**NOTE** The MIG supported a proposed solution to set up a Coordinate Reference System (CRS) registry and control body to manage the proposal of additional CRS under the governance of the MIG. Once this registry has been established, this requirements class will be updated.
+| A | For each feature collection in the API at least one of the CRS listed in the [INSPIRE coordinate reference systems register](https://inspire.ec.europa.eu/crs) SHOULD be included in the list of supported coordinate reference systems. |
 
 
 ## 9. Example <a name="example"></a>
